@@ -9,6 +9,7 @@ dependencies:
   built_collection: ^4.1.0
   built_value: ^6.3.2
   cupertino_icons: ^0.1.2
+  dio: ^2.1.0
   flutter:
     sdk: flutter
 
@@ -17,6 +18,7 @@ dev_dependencies:
   built_value_generator: ^6.3.2
   flutter_test:
     sdk: flutter
+  test: ^1.5.3
 
 flutter:
   uses-material-design: true
