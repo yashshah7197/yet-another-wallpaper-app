@@ -1,11 +1,14 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 
 import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
 
 part 'user.g.dart';
 
 abstract class User implements Built<User, UserBuilder> {
+  static Serializer<User> get serializer => _$userSerializer;
+
   String get id;
 
   String get username;
@@ -76,6 +79,9 @@ abstract class User implements Built<User, UserBuilder> {
 
 abstract class UserProfileImage
     implements Built<UserProfileImage, UserProfileImageBuilder> {
+  static Serializer<UserProfileImage> get serializer =>
+      _$userProfileImageSerializer;
+
   String get small;
 
   String get medium;
@@ -89,6 +95,8 @@ abstract class UserProfileImage
 }
 
 abstract class UserLinks implements Built<UserLinks, UserLinksBuilder> {
+  static Serializer<UserLinks> get serializer => _$userLinksSerializer;
+
   String get self;
 
   String get html;
@@ -109,6 +117,8 @@ abstract class UserLinks implements Built<UserLinks, UserLinksBuilder> {
 }
 
 abstract class UserTags implements Built<UserTags, UserTagsBuilder> {
+  static Serializer<UserTags> get serializer => _$userTagsSerializer;
+
   BuiltList<UserTag> get custom;
 
   BuiltList<UserTag> get aggregated;
@@ -119,6 +129,8 @@ abstract class UserTags implements Built<UserTags, UserTagsBuilder> {
 }
 
 abstract class UserTag implements Built<UserTag, UserTagBuilder> {
+  static Serializer<UserTag> get serializer => _$userTagSerializer;
+
   String get title;
 
   UserTag._();

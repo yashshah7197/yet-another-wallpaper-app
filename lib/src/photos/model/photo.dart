@@ -1,10 +1,13 @@
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 
 import 'package:yet_another_wallpaper_app/src/users/model/user.dart';
 
 part 'photo.g.dart';
 
 abstract class Photo implements Built<Photo, PhotoBuilder> {
+  static Serializer<Photo> get serializer => _$photoSerializer;
+
   String get id;
 
   @nullable
@@ -56,6 +59,8 @@ abstract class Photo implements Built<Photo, PhotoBuilder> {
 
 abstract class PhotoLocation
     implements Built<PhotoLocation, PhotoLocationBuilder> {
+  static Serializer<PhotoLocation> get serializer => _$photoLocationSerializer;
+
   String get title;
 
   @nullable
@@ -76,6 +81,9 @@ abstract class PhotoLocation
 
 abstract class PhotoLocationPosition
     implements Built<PhotoLocationPosition, PhotoLocationPositionBuilder> {
+  static Serializer<PhotoLocationPosition> get serializer =>
+      _$photoLocationPositionSerializer;
+
   @nullable
   double get latitude;
 
@@ -89,6 +97,8 @@ abstract class PhotoLocationPosition
 }
 
 abstract class PhotoExif implements Built<PhotoExif, PhotoExifBuilder> {
+  static Serializer<PhotoExif> get serializer => _$photoExifSerializer;
+
   String get make;
 
   String get model;
@@ -109,6 +119,8 @@ abstract class PhotoExif implements Built<PhotoExif, PhotoExifBuilder> {
 }
 
 abstract class PhotoUrls implements Built<PhotoUrls, PhotoUrlsBuilder> {
+  static Serializer<PhotoUrls> get serializer => _$photoUrlsSerializer;
+
   String get raw;
 
   String get full;
@@ -125,6 +137,8 @@ abstract class PhotoUrls implements Built<PhotoUrls, PhotoUrlsBuilder> {
 }
 
 abstract class PhotoLinks implements Built<PhotoLinks, PhotoLinksBuilder> {
+  static Serializer<PhotoLinks> get serializer => _$photoLinksSerializer;
+
   String get self;
 
   String get html;

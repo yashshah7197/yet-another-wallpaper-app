@@ -6,6 +6,514 @@ part of 'photo.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<Photo> _$photoSerializer = new _$PhotoSerializer();
+Serializer<PhotoLocation> _$photoLocationSerializer =
+    new _$PhotoLocationSerializer();
+Serializer<PhotoLocationPosition> _$photoLocationPositionSerializer =
+    new _$PhotoLocationPositionSerializer();
+Serializer<PhotoExif> _$photoExifSerializer = new _$PhotoExifSerializer();
+Serializer<PhotoUrls> _$photoUrlsSerializer = new _$PhotoUrlsSerializer();
+Serializer<PhotoLinks> _$photoLinksSerializer = new _$PhotoLinksSerializer();
+
+class _$PhotoSerializer implements StructuredSerializer<Photo> {
+  @override
+  final Iterable<Type> types = const [Photo, _$Photo];
+  @override
+  final String wireName = 'Photo';
+
+  @override
+  Iterable serialize(Serializers serializers, Photo object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'id',
+      serializers.serialize(object.id, specifiedType: const FullType(String)),
+      'urls',
+      serializers.serialize(object.urls,
+          specifiedType: const FullType(PhotoUrls)),
+    ];
+    if (object.createdAt != null) {
+      result
+        ..add('created_at')
+        ..add(serializers.serialize(object.createdAt,
+            specifiedType: const FullType(DateTime)));
+    }
+    if (object.width != null) {
+      result
+        ..add('width')
+        ..add(serializers.serialize(object.width,
+            specifiedType: const FullType(int)));
+    }
+    if (object.height != null) {
+      result
+        ..add('height')
+        ..add(serializers.serialize(object.height,
+            specifiedType: const FullType(int)));
+    }
+    if (object.color != null) {
+      result
+        ..add('color')
+        ..add(serializers.serialize(object.color,
+            specifiedType: const FullType(String)));
+    }
+    if (object.description != null) {
+      result
+        ..add('description')
+        ..add(serializers.serialize(object.description,
+            specifiedType: const FullType(String)));
+    }
+    if (object.location != null) {
+      result
+        ..add('location')
+        ..add(serializers.serialize(object.location,
+            specifiedType: const FullType(PhotoLocation)));
+    }
+    if (object.exif != null) {
+      result
+        ..add('exif')
+        ..add(serializers.serialize(object.exif,
+            specifiedType: const FullType(PhotoExif)));
+    }
+    if (object.viewCount != null) {
+      result
+        ..add('views')
+        ..add(serializers.serialize(object.viewCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.likeCount != null) {
+      result
+        ..add('likes')
+        ..add(serializers.serialize(object.likeCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.downloadCount != null) {
+      result
+        ..add('downloads')
+        ..add(serializers.serialize(object.downloadCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.user != null) {
+      result
+        ..add('user')
+        ..add(serializers.serialize(object.user,
+            specifiedType: const FullType(User)));
+    }
+    if (object.links != null) {
+      result
+        ..add('links')
+        ..add(serializers.serialize(object.links,
+            specifiedType: const FullType(PhotoLinks)));
+    }
+
+    return result;
+  }
+
+  @override
+  Photo deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PhotoBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'created_at':
+          result.createdAt = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'width':
+          result.width = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'height':
+          result.height = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'color':
+          result.color = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'description':
+          result.description = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'location':
+          result.location.replace(serializers.deserialize(value,
+              specifiedType: const FullType(PhotoLocation)) as PhotoLocation);
+          break;
+        case 'exif':
+          result.exif.replace(serializers.deserialize(value,
+              specifiedType: const FullType(PhotoExif)) as PhotoExif);
+          break;
+        case 'views':
+          result.viewCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'likes':
+          result.likeCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'downloads':
+          result.downloadCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'user':
+          result.user.replace(serializers.deserialize(value,
+              specifiedType: const FullType(User)) as User);
+          break;
+        case 'urls':
+          result.urls.replace(serializers.deserialize(value,
+              specifiedType: const FullType(PhotoUrls)) as PhotoUrls);
+          break;
+        case 'links':
+          result.links.replace(serializers.deserialize(value,
+              specifiedType: const FullType(PhotoLinks)) as PhotoLinks);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PhotoLocationSerializer implements StructuredSerializer<PhotoLocation> {
+  @override
+  final Iterable<Type> types = const [PhotoLocation, _$PhotoLocation];
+  @override
+  final String wireName = 'PhotoLocation';
+
+  @override
+  Iterable serialize(Serializers serializers, PhotoLocation object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'title',
+      serializers.serialize(object.title,
+          specifiedType: const FullType(String)),
+      'position',
+      serializers.serialize(object.position,
+          specifiedType: const FullType(PhotoLocationPosition)),
+    ];
+    if (object.name != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(object.name,
+            specifiedType: const FullType(String)));
+    }
+    if (object.city != null) {
+      result
+        ..add('city')
+        ..add(serializers.serialize(object.city,
+            specifiedType: const FullType(String)));
+    }
+    if (object.country != null) {
+      result
+        ..add('country')
+        ..add(serializers.serialize(object.country,
+            specifiedType: const FullType(String)));
+    }
+
+    return result;
+  }
+
+  @override
+  PhotoLocation deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PhotoLocationBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'title':
+          result.title = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'name':
+          result.name = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'city':
+          result.city = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'country':
+          result.country = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'position':
+          result.position.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(PhotoLocationPosition))
+              as PhotoLocationPosition);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PhotoLocationPositionSerializer
+    implements StructuredSerializer<PhotoLocationPosition> {
+  @override
+  final Iterable<Type> types = const [
+    PhotoLocationPosition,
+    _$PhotoLocationPosition
+  ];
+  @override
+  final String wireName = 'PhotoLocationPosition';
+
+  @override
+  Iterable serialize(Serializers serializers, PhotoLocationPosition object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    if (object.latitude != null) {
+      result
+        ..add('latitude')
+        ..add(serializers.serialize(object.latitude,
+            specifiedType: const FullType(double)));
+    }
+    if (object.longitude != null) {
+      result
+        ..add('longitude')
+        ..add(serializers.serialize(object.longitude,
+            specifiedType: const FullType(double)));
+    }
+
+    return result;
+  }
+
+  @override
+  PhotoLocationPosition deserialize(
+      Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PhotoLocationPositionBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'latitude':
+          result.latitude = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+        case 'longitude':
+          result.longitude = serializers.deserialize(value,
+              specifiedType: const FullType(double)) as double;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PhotoExifSerializer implements StructuredSerializer<PhotoExif> {
+  @override
+  final Iterable<Type> types = const [PhotoExif, _$PhotoExif];
+  @override
+  final String wireName = 'PhotoExif';
+
+  @override
+  Iterable serialize(Serializers serializers, PhotoExif object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'make',
+      serializers.serialize(object.make, specifiedType: const FullType(String)),
+      'model',
+      serializers.serialize(object.model,
+          specifiedType: const FullType(String)),
+      'exposure_time',
+      serializers.serialize(object.exposureTime,
+          specifiedType: const FullType(String)),
+      'aperture',
+      serializers.serialize(object.aperture,
+          specifiedType: const FullType(String)),
+      'focal_length',
+      serializers.serialize(object.focalLength,
+          specifiedType: const FullType(String)),
+      'iso',
+      serializers.serialize(object.iso, specifiedType: const FullType(int)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PhotoExif deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PhotoExifBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'make':
+          result.make = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'model':
+          result.model = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'exposure_time':
+          result.exposureTime = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'aperture':
+          result.aperture = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'focal_length':
+          result.focalLength = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'iso':
+          result.iso = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PhotoUrlsSerializer implements StructuredSerializer<PhotoUrls> {
+  @override
+  final Iterable<Type> types = const [PhotoUrls, _$PhotoUrls];
+  @override
+  final String wireName = 'PhotoUrls';
+
+  @override
+  Iterable serialize(Serializers serializers, PhotoUrls object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'raw',
+      serializers.serialize(object.raw, specifiedType: const FullType(String)),
+      'full',
+      serializers.serialize(object.full, specifiedType: const FullType(String)),
+      'regular',
+      serializers.serialize(object.regular,
+          specifiedType: const FullType(String)),
+      'small',
+      serializers.serialize(object.small,
+          specifiedType: const FullType(String)),
+      'thumb',
+      serializers.serialize(object.thumb,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PhotoUrls deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PhotoUrlsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'raw':
+          result.raw = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'full':
+          result.full = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'regular':
+          result.regular = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'small':
+          result.small = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'thumb':
+          result.thumb = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$PhotoLinksSerializer implements StructuredSerializer<PhotoLinks> {
+  @override
+  final Iterable<Type> types = const [PhotoLinks, _$PhotoLinks];
+  @override
+  final String wireName = 'PhotoLinks';
+
+  @override
+  Iterable serialize(Serializers serializers, PhotoLinks object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'self',
+      serializers.serialize(object.self, specifiedType: const FullType(String)),
+      'html',
+      serializers.serialize(object.html, specifiedType: const FullType(String)),
+      'download',
+      serializers.serialize(object.download,
+          specifiedType: const FullType(String)),
+      'download_location',
+      serializers.serialize(object.downloadLocation,
+          specifiedType: const FullType(String)),
+    ];
+
+    return result;
+  }
+
+  @override
+  PhotoLinks deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new PhotoLinksBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'self':
+          result.self = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'html':
+          result.html = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'download':
+          result.download = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'download_location':
+          result.downloadLocation = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$Photo extends Photo {
   @override
   final String id;
