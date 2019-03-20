@@ -13,3 +13,11 @@ final Serializers serializers = (_$serializers.toBuilder()
       ..add(Iso8601DateTimeSerializer())
       ..addPlugin(StandardJsonPlugin()))
     .build();
+
+T deserialize<T>(dynamic json) =>
+    serializers.deserializeWith<T>(serializers.serializerForType(T), json);
+
+BuiltList<T> deserializeListOf<T>(List<dynamic> jsonList) =>
+    BuiltList.from(jsonList
+        .map((jsonItem) => deserialize<T>(jsonItem))
+        .toList(growable: false));
