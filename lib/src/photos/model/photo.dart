@@ -8,6 +8,7 @@ part 'photo.g.dart';
 abstract class Photo implements Built<Photo, PhotoBuilder> {
   static Serializer<Photo> get serializer => _$photoSerializer;
 
+  @nullable
   String get id;
 
   @nullable
@@ -47,6 +48,7 @@ abstract class Photo implements Built<Photo, PhotoBuilder> {
   @nullable
   User get user;
 
+  @nullable
   PhotoUrls get urls;
 
   @nullable
@@ -61,6 +63,7 @@ abstract class PhotoLocation
     implements Built<PhotoLocation, PhotoLocationBuilder> {
   static Serializer<PhotoLocation> get serializer => _$photoLocationSerializer;
 
+  @nullable
   String get title;
 
   @nullable
@@ -72,6 +75,7 @@ abstract class PhotoLocation
   @nullable
   String get country;
 
+  @nullable
   PhotoLocationPosition get position;
 
   PhotoLocation._();
@@ -99,18 +103,24 @@ abstract class PhotoLocationPosition
 abstract class PhotoExif implements Built<PhotoExif, PhotoExifBuilder> {
   static Serializer<PhotoExif> get serializer => _$photoExifSerializer;
 
+  @nullable
   String get make;
 
+  @nullable
   String get model;
 
+  @nullable
   @BuiltValueField(wireName: 'exposure_time')
   String get exposureTime;
 
+  @nullable
   String get aperture;
 
+  @nullable
   @BuiltValueField(wireName: 'focal_length')
   String get focalLength;
 
+  @nullable
   int get iso;
 
   PhotoExif._();
@@ -121,14 +131,19 @@ abstract class PhotoExif implements Built<PhotoExif, PhotoExifBuilder> {
 abstract class PhotoUrls implements Built<PhotoUrls, PhotoUrlsBuilder> {
   static Serializer<PhotoUrls> get serializer => _$photoUrlsSerializer;
 
+  @nullable
   String get raw;
 
+  @nullable
   String get full;
 
+  @nullable
   String get regular;
 
+  @nullable
   String get small;
 
+  @nullable
   String get thumb;
 
   PhotoUrls._();
@@ -139,12 +154,16 @@ abstract class PhotoUrls implements Built<PhotoUrls, PhotoUrlsBuilder> {
 abstract class PhotoLinks implements Built<PhotoLinks, PhotoLinksBuilder> {
   static Serializer<PhotoLinks> get serializer => _$photoLinksSerializer;
 
+  @nullable
   String get self;
 
+  @nullable
   String get html;
 
+  @nullable
   String get download;
 
+  @nullable
   @BuiltValueField(wireName: 'download_location')
   String get downloadLocation;
 

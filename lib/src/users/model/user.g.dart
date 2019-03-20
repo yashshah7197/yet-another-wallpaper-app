@@ -22,33 +22,37 @@ class _$UserSerializer implements StructuredSerializer<User> {
   @override
   Iterable serialize(Serializers serializers, User object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
-      'username',
-      serializers.serialize(object.username,
-          specifiedType: const FullType(String)),
-      'profile_image',
-      serializers.serialize(object.profileImage,
-          specifiedType: const FullType(UserProfileImage)),
-      'name',
-      serializers.serialize(object.name, specifiedType: const FullType(String)),
-      'first_name',
-      serializers.serialize(object.firstName,
-          specifiedType: const FullType(String)),
-      'total_photos',
-      serializers.serialize(object.photoCount,
-          specifiedType: const FullType(int)),
-      'total_collections',
-      serializers.serialize(object.collectionCount,
-          specifiedType: const FullType(int)),
-      'total_likes',
-      serializers.serialize(object.likeCount,
-          specifiedType: const FullType(int)),
-      'links',
-      serializers.serialize(object.links,
-          specifiedType: const FullType(UserLinks)),
-    ];
+    final result = <Object>[];
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(String)));
+    }
+    if (object.username != null) {
+      result
+        ..add('username')
+        ..add(serializers.serialize(object.username,
+            specifiedType: const FullType(String)));
+    }
+    if (object.profileImage != null) {
+      result
+        ..add('profile_image')
+        ..add(serializers.serialize(object.profileImage,
+            specifiedType: const FullType(UserProfileImage)));
+    }
+    if (object.name != null) {
+      result
+        ..add('name')
+        ..add(serializers.serialize(object.name,
+            specifiedType: const FullType(String)));
+    }
+    if (object.firstName != null) {
+      result
+        ..add('first_name')
+        ..add(serializers.serialize(object.firstName,
+            specifiedType: const FullType(String)));
+    }
     if (object.lastName != null) {
       result
         ..add('last_name')
@@ -97,6 +101,24 @@ class _$UserSerializer implements StructuredSerializer<User> {
         ..add(serializers.serialize(object.followingCount,
             specifiedType: const FullType(int)));
     }
+    if (object.photoCount != null) {
+      result
+        ..add('total_photos')
+        ..add(serializers.serialize(object.photoCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.collectionCount != null) {
+      result
+        ..add('total_collections')
+        ..add(serializers.serialize(object.collectionCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.likeCount != null) {
+      result
+        ..add('total_likes')
+        ..add(serializers.serialize(object.likeCount,
+            specifiedType: const FullType(int)));
+    }
     if (object.downloadCount != null) {
       result
         ..add('downloads')
@@ -115,6 +137,12 @@ class _$UserSerializer implements StructuredSerializer<User> {
         ..add('tags')
         ..add(serializers.serialize(object.tags,
             specifiedType: const FullType(UserTags)));
+    }
+    if (object.links != null) {
+      result
+        ..add('links')
+        ..add(serializers.serialize(object.links,
+            specifiedType: const FullType(UserLinks)));
     }
 
     return result;
@@ -231,17 +259,25 @@ class _$UserProfileImageSerializer
   @override
   Iterable serialize(Serializers serializers, UserProfileImage object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'small',
-      serializers.serialize(object.small,
-          specifiedType: const FullType(String)),
-      'medium',
-      serializers.serialize(object.medium,
-          specifiedType: const FullType(String)),
-      'large',
-      serializers.serialize(object.large,
-          specifiedType: const FullType(String)),
-    ];
+    final result = <Object>[];
+    if (object.small != null) {
+      result
+        ..add('small')
+        ..add(serializers.serialize(object.small,
+            specifiedType: const FullType(String)));
+    }
+    if (object.medium != null) {
+      result
+        ..add('medium')
+        ..add(serializers.serialize(object.medium,
+            specifiedType: const FullType(String)));
+    }
+    if (object.large != null) {
+      result
+        ..add('large')
+        ..add(serializers.serialize(object.large,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -285,27 +321,49 @@ class _$UserLinksSerializer implements StructuredSerializer<UserLinks> {
   @override
   Iterable serialize(Serializers serializers, UserLinks object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'self',
-      serializers.serialize(object.self, specifiedType: const FullType(String)),
-      'html',
-      serializers.serialize(object.html, specifiedType: const FullType(String)),
-      'photos',
-      serializers.serialize(object.photos,
-          specifiedType: const FullType(String)),
-      'likes',
-      serializers.serialize(object.likes,
-          specifiedType: const FullType(String)),
-      'portfolio',
-      serializers.serialize(object.portfolio,
-          specifiedType: const FullType(String)),
-      'following',
-      serializers.serialize(object.following,
-          specifiedType: const FullType(String)),
-      'followers',
-      serializers.serialize(object.followers,
-          specifiedType: const FullType(String)),
-    ];
+    final result = <Object>[];
+    if (object.self != null) {
+      result
+        ..add('self')
+        ..add(serializers.serialize(object.self,
+            specifiedType: const FullType(String)));
+    }
+    if (object.html != null) {
+      result
+        ..add('html')
+        ..add(serializers.serialize(object.html,
+            specifiedType: const FullType(String)));
+    }
+    if (object.photos != null) {
+      result
+        ..add('photos')
+        ..add(serializers.serialize(object.photos,
+            specifiedType: const FullType(String)));
+    }
+    if (object.likes != null) {
+      result
+        ..add('likes')
+        ..add(serializers.serialize(object.likes,
+            specifiedType: const FullType(String)));
+    }
+    if (object.portfolio != null) {
+      result
+        ..add('portfolio')
+        ..add(serializers.serialize(object.portfolio,
+            specifiedType: const FullType(String)));
+    }
+    if (object.following != null) {
+      result
+        ..add('following')
+        ..add(serializers.serialize(object.following,
+            specifiedType: const FullType(String)));
+    }
+    if (object.followers != null) {
+      result
+        ..add('followers')
+        ..add(serializers.serialize(object.followers,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -365,16 +423,21 @@ class _$UserTagsSerializer implements StructuredSerializer<UserTags> {
   @override
   Iterable serialize(Serializers serializers, UserTags object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'custom',
-      serializers.serialize(object.custom,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(UserTag)])),
-      'aggregated',
-      serializers.serialize(object.aggregated,
-          specifiedType:
-              const FullType(BuiltList, const [const FullType(UserTag)])),
-    ];
+    final result = <Object>[];
+    if (object.custom != null) {
+      result
+        ..add('custom')
+        ..add(serializers.serialize(object.custom,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(UserTag)])));
+    }
+    if (object.aggregated != null) {
+      result
+        ..add('aggregated')
+        ..add(serializers.serialize(object.aggregated,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(UserTag)])));
+    }
 
     return result;
   }
@@ -416,11 +479,13 @@ class _$UserTagSerializer implements StructuredSerializer<UserTag> {
   @override
   Iterable serialize(Serializers serializers, UserTag object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'title',
-      serializers.serialize(object.title,
-          specifiedType: const FullType(String)),
-    ];
+    final result = <Object>[];
+    if (object.title != null) {
+      result
+        ..add('title')
+        ..add(serializers.serialize(object.title,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -513,35 +578,7 @@ class _$User extends User {
       this.photos,
       this.tags,
       this.links})
-      : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('User', 'id');
-    }
-    if (username == null) {
-      throw new BuiltValueNullFieldError('User', 'username');
-    }
-    if (profileImage == null) {
-      throw new BuiltValueNullFieldError('User', 'profileImage');
-    }
-    if (name == null) {
-      throw new BuiltValueNullFieldError('User', 'name');
-    }
-    if (firstName == null) {
-      throw new BuiltValueNullFieldError('User', 'firstName');
-    }
-    if (photoCount == null) {
-      throw new BuiltValueNullFieldError('User', 'photoCount');
-    }
-    if (collectionCount == null) {
-      throw new BuiltValueNullFieldError('User', 'collectionCount');
-    }
-    if (likeCount == null) {
-      throw new BuiltValueNullFieldError('User', 'likeCount');
-    }
-    if (links == null) {
-      throw new BuiltValueNullFieldError('User', 'links');
-    }
-  }
+      : super._();
 
   @override
   User rebuild(void updates(UserBuilder b)) =>
@@ -784,7 +821,7 @@ class UserBuilder implements Builder<User, UserBuilder> {
           new _$User._(
               id: id,
               username: username,
-              profileImage: profileImage.build(),
+              profileImage: _profileImage?.build(),
               name: name,
               firstName: firstName,
               lastName: lastName,
@@ -801,19 +838,19 @@ class UserBuilder implements Builder<User, UserBuilder> {
               downloadCount: downloadCount,
               photos: _photos?.build(),
               tags: _tags?.build(),
-              links: links.build());
+              links: _links?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'profileImage';
-        profileImage.build();
+        _profileImage?.build();
 
         _$failedField = 'photos';
         _photos?.build();
         _$failedField = 'tags';
         _tags?.build();
         _$failedField = 'links';
-        links.build();
+        _links?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'User', _$failedField, e.toString());
@@ -836,17 +873,7 @@ class _$UserProfileImage extends UserProfileImage {
   factory _$UserProfileImage([void updates(UserProfileImageBuilder b)]) =>
       (new UserProfileImageBuilder()..update(updates)).build();
 
-  _$UserProfileImage._({this.small, this.medium, this.large}) : super._() {
-    if (small == null) {
-      throw new BuiltValueNullFieldError('UserProfileImage', 'small');
-    }
-    if (medium == null) {
-      throw new BuiltValueNullFieldError('UserProfileImage', 'medium');
-    }
-    if (large == null) {
-      throw new BuiltValueNullFieldError('UserProfileImage', 'large');
-    }
-  }
+  _$UserProfileImage._({this.small, this.medium, this.large}) : super._();
 
   @override
   UserProfileImage rebuild(void updates(UserProfileImageBuilder b)) =>
@@ -958,29 +985,7 @@ class _$UserLinks extends UserLinks {
       this.portfolio,
       this.following,
       this.followers})
-      : super._() {
-    if (self == null) {
-      throw new BuiltValueNullFieldError('UserLinks', 'self');
-    }
-    if (html == null) {
-      throw new BuiltValueNullFieldError('UserLinks', 'html');
-    }
-    if (photos == null) {
-      throw new BuiltValueNullFieldError('UserLinks', 'photos');
-    }
-    if (likes == null) {
-      throw new BuiltValueNullFieldError('UserLinks', 'likes');
-    }
-    if (portfolio == null) {
-      throw new BuiltValueNullFieldError('UserLinks', 'portfolio');
-    }
-    if (following == null) {
-      throw new BuiltValueNullFieldError('UserLinks', 'following');
-    }
-    if (followers == null) {
-      throw new BuiltValueNullFieldError('UserLinks', 'followers');
-    }
-  }
+      : super._();
 
   @override
   UserLinks rebuild(void updates(UserLinksBuilder b)) =>
@@ -1115,14 +1120,7 @@ class _$UserTags extends UserTags {
   factory _$UserTags([void updates(UserTagsBuilder b)]) =>
       (new UserTagsBuilder()..update(updates)).build();
 
-  _$UserTags._({this.custom, this.aggregated}) : super._() {
-    if (custom == null) {
-      throw new BuiltValueNullFieldError('UserTags', 'custom');
-    }
-    if (aggregated == null) {
-      throw new BuiltValueNullFieldError('UserTags', 'aggregated');
-    }
-  }
+  _$UserTags._({this.custom, this.aggregated}) : super._();
 
   @override
   UserTags rebuild(void updates(UserTagsBuilder b)) =>
@@ -1197,14 +1195,14 @@ class UserTagsBuilder implements Builder<UserTags, UserTagsBuilder> {
     try {
       _$result = _$v ??
           new _$UserTags._(
-              custom: custom.build(), aggregated: aggregated.build());
+              custom: _custom?.build(), aggregated: _aggregated?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'custom';
-        custom.build();
+        _custom?.build();
         _$failedField = 'aggregated';
-        aggregated.build();
+        _aggregated?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'UserTags', _$failedField, e.toString());
@@ -1223,11 +1221,7 @@ class _$UserTag extends UserTag {
   factory _$UserTag([void updates(UserTagBuilder b)]) =>
       (new UserTagBuilder()..update(updates)).build();
 
-  _$UserTag._({this.title}) : super._() {
-    if (title == null) {
-      throw new BuiltValueNullFieldError('UserTag', 'title');
-    }
-  }
+  _$UserTag._({this.title}) : super._();
 
   @override
   UserTag rebuild(void updates(UserTagBuilder b)) =>

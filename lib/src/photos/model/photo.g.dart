@@ -24,13 +24,13 @@ class _$PhotoSerializer implements StructuredSerializer<Photo> {
   @override
   Iterable serialize(Serializers serializers, Photo object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'id',
-      serializers.serialize(object.id, specifiedType: const FullType(String)),
-      'urls',
-      serializers.serialize(object.urls,
-          specifiedType: const FullType(PhotoUrls)),
-    ];
+    final result = <Object>[];
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(String)));
+    }
     if (object.createdAt != null) {
       result
         ..add('created_at')
@@ -96,6 +96,12 @@ class _$PhotoSerializer implements StructuredSerializer<Photo> {
         ..add('user')
         ..add(serializers.serialize(object.user,
             specifiedType: const FullType(User)));
+    }
+    if (object.urls != null) {
+      result
+        ..add('urls')
+        ..add(serializers.serialize(object.urls,
+            specifiedType: const FullType(PhotoUrls)));
     }
     if (object.links != null) {
       result
@@ -190,14 +196,13 @@ class _$PhotoLocationSerializer implements StructuredSerializer<PhotoLocation> {
   @override
   Iterable serialize(Serializers serializers, PhotoLocation object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'title',
-      serializers.serialize(object.title,
-          specifiedType: const FullType(String)),
-      'position',
-      serializers.serialize(object.position,
-          specifiedType: const FullType(PhotoLocationPosition)),
-    ];
+    final result = <Object>[];
+    if (object.title != null) {
+      result
+        ..add('title')
+        ..add(serializers.serialize(object.title,
+            specifiedType: const FullType(String)));
+    }
     if (object.name != null) {
       result
         ..add('name')
@@ -215,6 +220,12 @@ class _$PhotoLocationSerializer implements StructuredSerializer<PhotoLocation> {
         ..add('country')
         ..add(serializers.serialize(object.country,
             specifiedType: const FullType(String)));
+    }
+    if (object.position != null) {
+      result
+        ..add('position')
+        ..add(serializers.serialize(object.position,
+            specifiedType: const FullType(PhotoLocationPosition)));
     }
 
     return result;
@@ -325,24 +336,43 @@ class _$PhotoExifSerializer implements StructuredSerializer<PhotoExif> {
   @override
   Iterable serialize(Serializers serializers, PhotoExif object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'make',
-      serializers.serialize(object.make, specifiedType: const FullType(String)),
-      'model',
-      serializers.serialize(object.model,
-          specifiedType: const FullType(String)),
-      'exposure_time',
-      serializers.serialize(object.exposureTime,
-          specifiedType: const FullType(String)),
-      'aperture',
-      serializers.serialize(object.aperture,
-          specifiedType: const FullType(String)),
-      'focal_length',
-      serializers.serialize(object.focalLength,
-          specifiedType: const FullType(String)),
-      'iso',
-      serializers.serialize(object.iso, specifiedType: const FullType(int)),
-    ];
+    final result = <Object>[];
+    if (object.make != null) {
+      result
+        ..add('make')
+        ..add(serializers.serialize(object.make,
+            specifiedType: const FullType(String)));
+    }
+    if (object.model != null) {
+      result
+        ..add('model')
+        ..add(serializers.serialize(object.model,
+            specifiedType: const FullType(String)));
+    }
+    if (object.exposureTime != null) {
+      result
+        ..add('exposure_time')
+        ..add(serializers.serialize(object.exposureTime,
+            specifiedType: const FullType(String)));
+    }
+    if (object.aperture != null) {
+      result
+        ..add('aperture')
+        ..add(serializers.serialize(object.aperture,
+            specifiedType: const FullType(String)));
+    }
+    if (object.focalLength != null) {
+      result
+        ..add('focal_length')
+        ..add(serializers.serialize(object.focalLength,
+            specifiedType: const FullType(String)));
+    }
+    if (object.iso != null) {
+      result
+        ..add('iso')
+        ..add(serializers.serialize(object.iso,
+            specifiedType: const FullType(int)));
+    }
 
     return result;
   }
@@ -398,21 +428,37 @@ class _$PhotoUrlsSerializer implements StructuredSerializer<PhotoUrls> {
   @override
   Iterable serialize(Serializers serializers, PhotoUrls object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'raw',
-      serializers.serialize(object.raw, specifiedType: const FullType(String)),
-      'full',
-      serializers.serialize(object.full, specifiedType: const FullType(String)),
-      'regular',
-      serializers.serialize(object.regular,
-          specifiedType: const FullType(String)),
-      'small',
-      serializers.serialize(object.small,
-          specifiedType: const FullType(String)),
-      'thumb',
-      serializers.serialize(object.thumb,
-          specifiedType: const FullType(String)),
-    ];
+    final result = <Object>[];
+    if (object.raw != null) {
+      result
+        ..add('raw')
+        ..add(serializers.serialize(object.raw,
+            specifiedType: const FullType(String)));
+    }
+    if (object.full != null) {
+      result
+        ..add('full')
+        ..add(serializers.serialize(object.full,
+            specifiedType: const FullType(String)));
+    }
+    if (object.regular != null) {
+      result
+        ..add('regular')
+        ..add(serializers.serialize(object.regular,
+            specifiedType: const FullType(String)));
+    }
+    if (object.small != null) {
+      result
+        ..add('small')
+        ..add(serializers.serialize(object.small,
+            specifiedType: const FullType(String)));
+    }
+    if (object.thumb != null) {
+      result
+        ..add('thumb')
+        ..add(serializers.serialize(object.thumb,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -464,18 +510,31 @@ class _$PhotoLinksSerializer implements StructuredSerializer<PhotoLinks> {
   @override
   Iterable serialize(Serializers serializers, PhotoLinks object,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = <Object>[
-      'self',
-      serializers.serialize(object.self, specifiedType: const FullType(String)),
-      'html',
-      serializers.serialize(object.html, specifiedType: const FullType(String)),
-      'download',
-      serializers.serialize(object.download,
-          specifiedType: const FullType(String)),
-      'download_location',
-      serializers.serialize(object.downloadLocation,
-          specifiedType: const FullType(String)),
-    ];
+    final result = <Object>[];
+    if (object.self != null) {
+      result
+        ..add('self')
+        ..add(serializers.serialize(object.self,
+            specifiedType: const FullType(String)));
+    }
+    if (object.html != null) {
+      result
+        ..add('html')
+        ..add(serializers.serialize(object.html,
+            specifiedType: const FullType(String)));
+    }
+    if (object.download != null) {
+      result
+        ..add('download')
+        ..add(serializers.serialize(object.download,
+            specifiedType: const FullType(String)));
+    }
+    if (object.downloadLocation != null) {
+      result
+        ..add('download_location')
+        ..add(serializers.serialize(object.downloadLocation,
+            specifiedType: const FullType(String)));
+    }
 
     return result;
   }
@@ -562,14 +621,7 @@ class _$Photo extends Photo {
       this.user,
       this.urls,
       this.links})
-      : super._() {
-    if (id == null) {
-      throw new BuiltValueNullFieldError('Photo', 'id');
-    }
-    if (urls == null) {
-      throw new BuiltValueNullFieldError('Photo', 'urls');
-    }
-  }
+      : super._();
 
   @override
   Photo rebuild(void updates(PhotoBuilder b)) =>
@@ -763,7 +815,7 @@ class PhotoBuilder implements Builder<Photo, PhotoBuilder> {
               likeCount: likeCount,
               downloadCount: downloadCount,
               user: _user?.build(),
-              urls: urls.build(),
+              urls: _urls?.build(),
               links: _links?.build());
     } catch (_) {
       String _$failedField;
@@ -776,7 +828,7 @@ class PhotoBuilder implements Builder<Photo, PhotoBuilder> {
         _$failedField = 'user';
         _user?.build();
         _$failedField = 'urls';
-        urls.build();
+        _urls?.build();
         _$failedField = 'links';
         _links?.build();
       } catch (e) {
@@ -807,14 +859,7 @@ class _$PhotoLocation extends PhotoLocation {
 
   _$PhotoLocation._(
       {this.title, this.name, this.city, this.country, this.position})
-      : super._() {
-    if (title == null) {
-      throw new BuiltValueNullFieldError('PhotoLocation', 'title');
-    }
-    if (position == null) {
-      throw new BuiltValueNullFieldError('PhotoLocation', 'position');
-    }
-  }
+      : super._();
 
   @override
   PhotoLocation rebuild(void updates(PhotoLocationBuilder b)) =>
@@ -917,12 +962,12 @@ class PhotoLocationBuilder
               name: name,
               city: city,
               country: country,
-              position: position.build());
+              position: _position?.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'position';
-        position.build();
+        _position?.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'PhotoLocation', _$failedField, e.toString());
@@ -1045,26 +1090,7 @@ class _$PhotoExif extends PhotoExif {
       this.aperture,
       this.focalLength,
       this.iso})
-      : super._() {
-    if (make == null) {
-      throw new BuiltValueNullFieldError('PhotoExif', 'make');
-    }
-    if (model == null) {
-      throw new BuiltValueNullFieldError('PhotoExif', 'model');
-    }
-    if (exposureTime == null) {
-      throw new BuiltValueNullFieldError('PhotoExif', 'exposureTime');
-    }
-    if (aperture == null) {
-      throw new BuiltValueNullFieldError('PhotoExif', 'aperture');
-    }
-    if (focalLength == null) {
-      throw new BuiltValueNullFieldError('PhotoExif', 'focalLength');
-    }
-    if (iso == null) {
-      throw new BuiltValueNullFieldError('PhotoExif', 'iso');
-    }
-  }
+      : super._();
 
   @override
   PhotoExif rebuild(void updates(PhotoExifBuilder b)) =>
@@ -1196,23 +1222,7 @@ class _$PhotoUrls extends PhotoUrls {
       (new PhotoUrlsBuilder()..update(updates)).build();
 
   _$PhotoUrls._({this.raw, this.full, this.regular, this.small, this.thumb})
-      : super._() {
-    if (raw == null) {
-      throw new BuiltValueNullFieldError('PhotoUrls', 'raw');
-    }
-    if (full == null) {
-      throw new BuiltValueNullFieldError('PhotoUrls', 'full');
-    }
-    if (regular == null) {
-      throw new BuiltValueNullFieldError('PhotoUrls', 'regular');
-    }
-    if (small == null) {
-      throw new BuiltValueNullFieldError('PhotoUrls', 'small');
-    }
-    if (thumb == null) {
-      throw new BuiltValueNullFieldError('PhotoUrls', 'thumb');
-    }
-  }
+      : super._();
 
   @override
   PhotoUrls rebuild(void updates(PhotoUrlsBuilder b)) =>
@@ -1326,20 +1336,7 @@ class _$PhotoLinks extends PhotoLinks {
       (new PhotoLinksBuilder()..update(updates)).build();
 
   _$PhotoLinks._({this.self, this.html, this.download, this.downloadLocation})
-      : super._() {
-    if (self == null) {
-      throw new BuiltValueNullFieldError('PhotoLinks', 'self');
-    }
-    if (html == null) {
-      throw new BuiltValueNullFieldError('PhotoLinks', 'html');
-    }
-    if (download == null) {
-      throw new BuiltValueNullFieldError('PhotoLinks', 'download');
-    }
-    if (downloadLocation == null) {
-      throw new BuiltValueNullFieldError('PhotoLinks', 'downloadLocation');
-    }
-  }
+      : super._();
 
   @override
   PhotoLinks rebuild(void updates(PhotoLinksBuilder b)) =>
