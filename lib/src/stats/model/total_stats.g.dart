@@ -6,6 +6,150 @@ part of 'total_stats.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<TotalStats> _$totalStatsSerializer = new _$TotalStatsSerializer();
+
+class _$TotalStatsSerializer implements StructuredSerializer<TotalStats> {
+  @override
+  final Iterable<Type> types = const [TotalStats, _$TotalStats];
+  @override
+  final String wireName = 'TotalStats';
+
+  @override
+  Iterable serialize(Serializers serializers, TotalStats object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    if (object.photographerCount != null) {
+      result
+        ..add('photographers')
+        ..add(serializers.serialize(object.photographerCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.photoCount != null) {
+      result
+        ..add('photos')
+        ..add(serializers.serialize(object.photoCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.pixelCount != null) {
+      result
+        ..add('pixels')
+        ..add(serializers.serialize(object.pixelCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.viewCount != null) {
+      result
+        ..add('views')
+        ..add(serializers.serialize(object.viewCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.likeCount != null) {
+      result
+        ..add('likes')
+        ..add(serializers.serialize(object.likeCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.downloadCount != null) {
+      result
+        ..add('downloads')
+        ..add(serializers.serialize(object.downloadCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.viewsPerSecondCount != null) {
+      result
+        ..add('views_per_second')
+        ..add(serializers.serialize(object.viewsPerSecondCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.downloadsPerSecondCount != null) {
+      result
+        ..add('downloads_per_second')
+        ..add(serializers.serialize(object.downloadsPerSecondCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.developerCount != null) {
+      result
+        ..add('developers')
+        ..add(serializers.serialize(object.developerCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.applicationCount != null) {
+      result
+        ..add('applications')
+        ..add(serializers.serialize(object.applicationCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.requestCount != null) {
+      result
+        ..add('requests')
+        ..add(serializers.serialize(object.requestCount,
+            specifiedType: const FullType(int)));
+    }
+
+    return result;
+  }
+
+  @override
+  TotalStats deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new TotalStatsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'photographers':
+          result.photographerCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'photos':
+          result.photoCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'pixels':
+          result.pixelCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'views':
+          result.viewCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'likes':
+          result.likeCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'downloads':
+          result.downloadCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'views_per_second':
+          result.viewsPerSecondCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'downloads_per_second':
+          result.downloadsPerSecondCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'developers':
+          result.developerCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'applications':
+          result.applicationCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'requests':
+          result.requestCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$TotalStats extends TotalStats {
   @override
   final int photographerCount;

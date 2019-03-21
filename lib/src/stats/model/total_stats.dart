@@ -1,8 +1,11 @@
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 
 part 'total_stats.g.dart';
 
 abstract class TotalStats implements Built<TotalStats, TotalStatsBuilder> {
+  static Serializer<TotalStats> get serializer => _$totalStatsSerializer;
+
   @nullable
   @BuiltValueField(wireName: 'photographers')
   int get photographerCount;

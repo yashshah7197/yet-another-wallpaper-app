@@ -5,11 +5,13 @@ import 'package:built_value/standard_json_plugin.dart';
 
 import 'package:yet_another_wallpaper_app/src/collections/model/collection.dart';
 import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
+import 'package:yet_another_wallpaper_app/src/stats/model/month_stats.dart';
+import 'package:yet_another_wallpaper_app/src/stats/model/total_stats.dart';
 import 'package:yet_another_wallpaper_app/src/users/model/user.dart';
 
 part 'serializers.g.dart';
 
-@SerializersFor(const [Collection, Photo, User])
+@SerializersFor(const [Collection, MonthStats, Photo, TotalStats, User])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(Iso8601DateTimeSerializer())
       ..addPlugin(StandardJsonPlugin()))

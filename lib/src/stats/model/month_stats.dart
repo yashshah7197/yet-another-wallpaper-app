@@ -1,8 +1,11 @@
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 
 part 'month_stats.g.dart';
 
 abstract class MonthStats implements Built<MonthStats, MonthStatsBuilder> {
+  static Serializer<MonthStats> get serializer => _$monthStatsSerializer;
+
   @nullable
   @BuiltValueField(wireName: 'new_photographers')
   int get photographerCount;

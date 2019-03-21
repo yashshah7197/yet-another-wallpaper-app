@@ -6,6 +6,130 @@ part of 'month_stats.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<MonthStats> _$monthStatsSerializer = new _$MonthStatsSerializer();
+
+class _$MonthStatsSerializer implements StructuredSerializer<MonthStats> {
+  @override
+  final Iterable<Type> types = const [MonthStats, _$MonthStats];
+  @override
+  final String wireName = 'MonthStats';
+
+  @override
+  Iterable serialize(Serializers serializers, MonthStats object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    if (object.photographerCount != null) {
+      result
+        ..add('new_photographers')
+        ..add(serializers.serialize(object.photographerCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.photoCount != null) {
+      result
+        ..add('new_photos')
+        ..add(serializers.serialize(object.photoCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.pixelCount != null) {
+      result
+        ..add('new_pixels')
+        ..add(serializers.serialize(object.pixelCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.viewCount != null) {
+      result
+        ..add('views')
+        ..add(serializers.serialize(object.viewCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.likeCount != null) {
+      result
+        ..add('likes')
+        ..add(serializers.serialize(object.likeCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.downloadCount != null) {
+      result
+        ..add('downloads')
+        ..add(serializers.serialize(object.downloadCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.developerCount != null) {
+      result
+        ..add('new_developers')
+        ..add(serializers.serialize(object.developerCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.applicationCount != null) {
+      result
+        ..add('new_applications')
+        ..add(serializers.serialize(object.applicationCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.requestCount != null) {
+      result
+        ..add('new_requests')
+        ..add(serializers.serialize(object.requestCount,
+            specifiedType: const FullType(int)));
+    }
+
+    return result;
+  }
+
+  @override
+  MonthStats deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new MonthStatsBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'new_photographers':
+          result.photographerCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'new_photos':
+          result.photoCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'new_pixels':
+          result.pixelCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'views':
+          result.viewCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'likes':
+          result.likeCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'downloads':
+          result.downloadCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'new_developers':
+          result.developerCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'new_applications':
+          result.applicationCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'new_requests':
+          result.requestCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$MonthStats extends MonthStats {
   @override
   final int photographerCount;
