@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
+import 'package:built_value/serializer.dart';
 
 import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
 import 'package:yet_another_wallpaper_app/src/users/model/user.dart';
@@ -7,6 +8,8 @@ import 'package:yet_another_wallpaper_app/src/users/model/user.dart';
 part 'collection.g.dart';
 
 abstract class Collection implements Built<Collection, CollectionBuilder> {
+  static Serializer<Collection> get serializer => _$collectionSerializer;
+
   @nullable
   int get id;
 
@@ -52,6 +55,8 @@ abstract class Collection implements Built<Collection, CollectionBuilder> {
 
 abstract class CollectionTag
     implements Built<CollectionTag, CollectionTagBuilder> {
+  static Serializer<CollectionTag> get serializer => _$collectionTagSerializer;
+
   @nullable
   String get title;
 
@@ -62,6 +67,9 @@ abstract class CollectionTag
 
 abstract class CollectionLinks
     implements Built<CollectionLinks, CollectionLinksBuilder> {
+  static Serializer<CollectionLinks> get serializer =>
+      _$collectionLinksSerializer;
+
   @nullable
   String get self;
 

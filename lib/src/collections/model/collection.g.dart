@@ -6,6 +6,276 @@ part of 'collection.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<Collection> _$collectionSerializer = new _$CollectionSerializer();
+Serializer<CollectionTag> _$collectionTagSerializer =
+    new _$CollectionTagSerializer();
+Serializer<CollectionLinks> _$collectionLinksSerializer =
+    new _$CollectionLinksSerializer();
+
+class _$CollectionSerializer implements StructuredSerializer<Collection> {
+  @override
+  final Iterable<Type> types = const [Collection, _$Collection];
+  @override
+  final String wireName = 'Collection';
+
+  @override
+  Iterable serialize(Serializers serializers, Collection object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(int)));
+    }
+    if (object.publishTime != null) {
+      result
+        ..add('published_at')
+        ..add(serializers.serialize(object.publishTime,
+            specifiedType: const FullType(DateTime)));
+    }
+    if (object.title != null) {
+      result
+        ..add('title')
+        ..add(serializers.serialize(object.title,
+            specifiedType: const FullType(String)));
+    }
+    if (object.description != null) {
+      result
+        ..add('description')
+        ..add(serializers.serialize(object.description,
+            specifiedType: const FullType(String)));
+    }
+    if (object.coverPhoto != null) {
+      result
+        ..add('cover_photo')
+        ..add(serializers.serialize(object.coverPhoto,
+            specifiedType: const FullType(Photo)));
+    }
+    if (object.previewPhotos != null) {
+      result
+        ..add('preview_photos')
+        ..add(serializers.serialize(object.previewPhotos,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(Photo)])));
+    }
+    if (object.isFeatured != null) {
+      result
+        ..add('featured')
+        ..add(serializers.serialize(object.isFeatured,
+            specifiedType: const FullType(bool)));
+    }
+    if (object.photoCount != null) {
+      result
+        ..add('total_photos')
+        ..add(serializers.serialize(object.photoCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.user != null) {
+      result
+        ..add('user')
+        ..add(serializers.serialize(object.user,
+            specifiedType: const FullType(User)));
+    }
+    if (object.tags != null) {
+      result
+        ..add('tags')
+        ..add(serializers.serialize(object.tags,
+            specifiedType: const FullType(
+                BuiltList, const [const FullType(CollectionTag)])));
+    }
+    if (object.links != null) {
+      result
+        ..add('links')
+        ..add(serializers.serialize(object.links,
+            specifiedType: const FullType(CollectionLinks)));
+    }
+
+    return result;
+  }
+
+  @override
+  Collection deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new CollectionBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'published_at':
+          result.publishTime = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'title':
+          result.title = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'description':
+          result.description = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'cover_photo':
+          result.coverPhoto.replace(serializers.deserialize(value,
+              specifiedType: const FullType(Photo)) as Photo);
+          break;
+        case 'preview_photos':
+          result.previewPhotos.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(Photo)]))
+              as BuiltList);
+          break;
+        case 'featured':
+          result.isFeatured = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'total_photos':
+          result.photoCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'user':
+          result.user.replace(serializers.deserialize(value,
+              specifiedType: const FullType(User)) as User);
+          break;
+        case 'tags':
+          result.tags.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(CollectionTag)]))
+              as BuiltList);
+          break;
+        case 'links':
+          result.links.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(CollectionLinks))
+              as CollectionLinks);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$CollectionTagSerializer implements StructuredSerializer<CollectionTag> {
+  @override
+  final Iterable<Type> types = const [CollectionTag, _$CollectionTag];
+  @override
+  final String wireName = 'CollectionTag';
+
+  @override
+  Iterable serialize(Serializers serializers, CollectionTag object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    if (object.title != null) {
+      result
+        ..add('title')
+        ..add(serializers.serialize(object.title,
+            specifiedType: const FullType(String)));
+    }
+
+    return result;
+  }
+
+  @override
+  CollectionTag deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new CollectionTagBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'title':
+          result.title = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$CollectionLinksSerializer
+    implements StructuredSerializer<CollectionLinks> {
+  @override
+  final Iterable<Type> types = const [CollectionLinks, _$CollectionLinks];
+  @override
+  final String wireName = 'CollectionLinks';
+
+  @override
+  Iterable serialize(Serializers serializers, CollectionLinks object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[];
+    if (object.self != null) {
+      result
+        ..add('self')
+        ..add(serializers.serialize(object.self,
+            specifiedType: const FullType(String)));
+    }
+    if (object.html != null) {
+      result
+        ..add('html')
+        ..add(serializers.serialize(object.html,
+            specifiedType: const FullType(String)));
+    }
+    if (object.photos != null) {
+      result
+        ..add('photos')
+        ..add(serializers.serialize(object.photos,
+            specifiedType: const FullType(String)));
+    }
+    if (object.related != null) {
+      result
+        ..add('related')
+        ..add(serializers.serialize(object.related,
+            specifiedType: const FullType(String)));
+    }
+
+    return result;
+  }
+
+  @override
+  CollectionLinks deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new CollectionLinksBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'self':
+          result.self = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'html':
+          result.html = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'photos':
+          result.photos = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'related':
+          result.related = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$Collection extends Collection {
   @override
   final int id;

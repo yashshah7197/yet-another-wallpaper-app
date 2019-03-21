@@ -7,6 +7,9 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Collection.serializer)
+      ..add(CollectionLinks.serializer)
+      ..add(CollectionTag.serializer)
       ..add(Photo.serializer)
       ..add(PhotoExif.serializer)
       ..add(PhotoLinks.serializer)
@@ -21,6 +24,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Photo)]),
           () => new ListBuilder<Photo>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(Photo)]),
+          () => new ListBuilder<Photo>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(CollectionTag)]),
+          () => new ListBuilder<CollectionTag>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(UserTag)]),
           () => new ListBuilder<UserTag>())
