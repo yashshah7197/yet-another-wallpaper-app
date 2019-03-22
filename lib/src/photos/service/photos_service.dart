@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
 import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
+import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 import 'package:yet_another_wallpaper_app/src/utils/serializers.dart';
 
 class PhotosService {
@@ -71,10 +72,4 @@ class PhotosService {
       return false;
     }
   }
-}
-
-class PhotosSortOrder {
-  static const latest = 'latest';
-  static const oldest = 'oldest';
-  static const popular = 'popular';
 }

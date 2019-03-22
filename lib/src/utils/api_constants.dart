@@ -6,3 +6,9 @@ class ApiConstants {
     'Authorization': 'Client-ID $accessKey'
   };
 }
+
+class PhotosSortOrder {
+  static const latest = 'latest';
+  static const oldest = 'oldest';
+  static const popular = 'popular';
+}
