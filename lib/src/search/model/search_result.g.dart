@@ -6,6 +6,86 @@ part of 'search_result.dart';
 // BuiltValueGenerator
 // **************************************************************************
 
+Serializer<SearchResult> _$searchResultSerializer =
+    new _$SearchResultSerializer();
+
+class _$SearchResultSerializer implements StructuredSerializer<SearchResult> {
+  @override
+  final Iterable<Type> types = const [SearchResult, _$SearchResult];
+  @override
+  final String wireName = 'SearchResult';
+
+  @override
+  Iterable serialize(Serializers serializers, SearchResult object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = <Object>[];
+    if (object.resultCount != null) {
+      result
+        ..add('total')
+        ..add(serializers.serialize(object.resultCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.pageCount != null) {
+      result
+        ..add('total_pages')
+        ..add(serializers.serialize(object.pageCount,
+            specifiedType: const FullType(int)));
+    }
+    if (object.results != null) {
+      result
+        ..add('results')
+        ..add(serializers.serialize(object.results,
+            specifiedType: new FullType(BuiltList, [parameterT])));
+    }
+
+    return result;
+  }
+
+  @override
+  SearchResult deserialize(Serializers serializers, Iterable serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final isUnderspecified =
+        specifiedType.isUnspecified || specifiedType.parameters.isEmpty;
+    if (!isUnderspecified) serializers.expectBuilder(specifiedType);
+    final parameterT =
+        isUnderspecified ? FullType.object : specifiedType.parameters[0];
+
+    final result = isUnderspecified
+        ? new SearchResultBuilder<Object>()
+        : serializers.newBuilder(specifiedType) as SearchResultBuilder;
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'total':
+          result.resultCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'total_pages':
+          result.pageCount = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
+        case 'results':
+          result.results.replace(serializers.deserialize(value,
+                  specifiedType: new FullType(BuiltList, [parameterT]))
+              as BuiltList);
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
 class _$SearchResult<T> extends SearchResult<T> {
   @override
   final int resultCount;
