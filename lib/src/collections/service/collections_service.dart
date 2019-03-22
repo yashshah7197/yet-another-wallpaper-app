@@ -9,14 +9,14 @@ import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
 import 'package:yet_another_wallpaper_app/src/utils/serializers.dart';
 
 class CollectionsService {
-  final Dio httpClient;
+  final Dio _httpClient;
 
-  CollectionsService({@required this.httpClient}) : assert(httpClient != null);
+  CollectionsService(this._httpClient) : assert(_httpClient != null);
 
   Future<BuiltList<Collection>> getCollections(
       {int page = 1, int perPage = 10}) async {
     try {
-      final response = await httpClient.get('collections',
+      final response = await _httpClient.get('collections',
           queryParameters: {'page': page, 'per_page': perPage});
       return deserializeListOf<Collection>(response.data);
     } on DioError catch (error) {
@@ -31,7 +31,7 @@ class CollectionsService {
   Future<BuiltList<Collection>> getFeaturedCollections(
       {int page = 1, int perPage = 10}) async {
     try {
-      final response = await httpClient.get('collections/featured',
+      final response = await _httpClient.get('collections/featured',
           queryParameters: {'page': page, 'per_page': perPage});
       return deserializeListOf<Collection>(response.data);
     } on DioError catch (error) {
@@ -45,7 +45,7 @@ class CollectionsService {
 
   Future<Collection> getCollection({@required int collectionId}) async {
     try {
-      final response = await httpClient.get('collections/$collectionId');
+      final response = await _httpClient.get('collections/$collectionId');
       return deserialize<Collection>(response.data);
     } on DioError catch (error) {
       // TODO: Handle errors properly instead of returning a collection with nulls
@@ -59,7 +59,7 @@ class CollectionsService {
   Future<BuiltList<Photo>> getCollectionPhotos(
       {@required int collectionId, int page = 1, int perPage = 30}) async {
     try {
-      final response = await httpClient.get('collections/$collectionId/photos',
+      final response = await _httpClient.get('collections/$collectionId/photos',
           queryParameters: {'page': page, 'per_page': perPage});
       return deserializeListOf<Photo>(response.data);
     } on DioError catch (error) {
@@ -75,7 +75,7 @@ class CollectionsService {
       {@required int collectionId}) async {
     try {
       final response =
-          await httpClient.get('collections/$collectionId/related');
+          await _httpClient.get('collections/$collectionId/related');
       return deserializeListOf<Collection>(response.data);
     } on DioError catch (error) {
       // TODO: Handle errors properly instead of returning an empty list

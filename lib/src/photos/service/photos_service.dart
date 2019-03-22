@@ -9,16 +9,16 @@ import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 import 'package:yet_another_wallpaper_app/src/utils/serializers.dart';
 
 class PhotosService {
-  final Dio httpClient;
+  final Dio _httpClient;
 
-  PhotosService({@required this.httpClient}) : assert(httpClient != null);
+  PhotosService(this._httpClient) : assert(_httpClient != null);
 
   Future<BuiltList<Photo>> getPhotos(
       {int page = 1,
       int perPage = 30,
       String sortOrder = PhotosSortOrder.latest}) async {
     try {
-      final response = await httpClient.get('photos', queryParameters: {
+      final response = await _httpClient.get('photos', queryParameters: {
         'page': page,
         'per_page': perPage,
         'order_by': sortOrder
@@ -35,7 +35,7 @@ class PhotosService {
 
   Future<Photo> getPhoto({@required String photoId}) async {
     try {
-      final response = await httpClient.get('photos/$photoId');
+      final response = await _httpClient.get('photos/$photoId');
       return deserialize<Photo>(response.data);
     } on DioError catch (error) {
       // TODO: Handle errors properly instead of returning a photo with nulls
@@ -48,7 +48,7 @@ class PhotosService {
 
   Future<BuiltList<Photo>> getRandomPhotos({int count = 1}) async {
     try {
-      final response = await httpClient
+      final response = await _httpClient
           .get('photos/random', queryParameters: {'count': count});
       return deserializeListOf<Photo>(response.data);
     } on DioError catch (error) {
@@ -62,7 +62,7 @@ class PhotosService {
 
   Future<bool> trackPhotoDownload({@required String photoId}) async {
     try {
-      await httpClient.get('photos/$photoId/download');
+      await _httpClient.get('photos/$photoId/download');
       return true;
     } on DioError catch (error) {
       // TODO: Handle errors properly instead of returning false

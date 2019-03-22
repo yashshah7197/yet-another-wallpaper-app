@@ -11,13 +11,13 @@ import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 import 'package:yet_another_wallpaper_app/src/utils/serializers.dart';
 
 class UsersService {
-  final Dio httpClient;
+  final Dio _httpClient;
 
-  UsersService({@required this.httpClient}) : assert(httpClient != null);
+  UsersService(this._httpClient) : assert(_httpClient != null);
 
   Future<User> getUserProfile({@required String username}) async {
     try {
-      final response = await httpClient.get('users/$username');
+      final response = await _httpClient.get('users/$username');
       return deserialize<User>(response.data);
     } on DioError catch (error) {
       // TODO: Handle errors properly instead of returning a user with nulls
@@ -34,7 +34,7 @@ class UsersService {
       int perPage = 30,
       String sortOrder = PhotosSortOrder.latest}) async {
     try {
-      final response = await httpClient.get('users/$username/photos',
+      final response = await _httpClient.get('users/$username/photos',
           queryParameters: {
             'page': page,
             'per_page': perPage,
@@ -56,7 +56,7 @@ class UsersService {
       int perPage = 30,
       String sortOrder = PhotosSortOrder.latest}) async {
     try {
-      final response = await httpClient.get('users/$username/likes',
+      final response = await _httpClient.get('users/$username/likes',
           queryParameters: {
             'page': page,
             'per_page': perPage,
@@ -75,7 +75,7 @@ class UsersService {
   Future<BuiltList<Collection>> getUserCollections(
       {@required String username, int page = 1, int perPage = 10}) async {
     try {
-      final response = await httpClient.get('users/$username/collections',
+      final response = await _httpClient.get('users/$username/collections',
           queryParameters: {'page': page, 'per_page': perPage});
       return deserializeListOf<Collection>(response.data);
     } on DioError catch (error) {

@@ -10,19 +10,19 @@ import 'package:yet_another_wallpaper_app/src/users/service/users_service.dart';
 import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 
 class UsersRepository {
-  final UsersService usersService;
+  final UsersService _usersService;
 
-  UsersRepository({@required this.usersService}) : assert(usersService != null);
+  UsersRepository(this._usersService) : assert(_usersService != null);
 
   Future<User> getUserProfile({@required String username}) async =>
-      await usersService.getUserProfile(username: username);
+      await _usersService.getUserProfile(username: username);
 
   Future<BuiltList<Photo>> getUserPhotos(
           {@required String username,
           int page = 1,
           int perPage = 30,
           String sortOrder = PhotosSortOrder.latest}) async =>
-      await usersService.getUserPhotos(
+      await _usersService.getUserPhotos(
           username: username,
           page: page,
           perPage: perPage,
@@ -33,7 +33,7 @@ class UsersRepository {
           int page = 1,
           int perPage = 30,
           String sortOrder = PhotosSortOrder.latest}) async =>
-      await usersService.getUserLikedPhotos(
+      await _usersService.getUserLikedPhotos(
           username: username,
           page: page,
           perPage: perPage,
@@ -41,6 +41,6 @@ class UsersRepository {
 
   Future<BuiltList<Collection>> getUserCollections(
           {@required String username, int page = 1, int perPage = 10}) async =>
-      usersService.getUserCollections(
+      _usersService.getUserCollections(
           username: username, page: page, perPage: perPage);
 }

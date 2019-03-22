@@ -11,14 +11,14 @@ import 'package:yet_another_wallpaper_app/src/users/model/user.dart';
 import 'package:yet_another_wallpaper_app/src/utils/serializers.dart';
 
 class SearchService {
-  final Dio httpClient;
+  final Dio _httpClient;
 
-  SearchService({@required this.httpClient}) : assert(httpClient != null);
+  SearchService(this._httpClient) : assert(_httpClient != null);
 
   Future<SearchResult<Photo>> searchPhotos(
       {@required String query, int page = 1, int perPage = 30}) async {
     try {
-      final response = await httpClient.get('search/photos',
+      final response = await _httpClient.get('search/photos',
           queryParameters: {'query': query, 'page': page, 'per_page': perPage});
       return serializers.deserialize(response.data,
           specifiedType:
@@ -35,7 +35,7 @@ class SearchService {
   Future<SearchResult<Collection>> searchCollections(
       {@required String query, int page = 1, int perPage = 30}) async {
     try {
-      final response = await httpClient.get('search/collections',
+      final response = await _httpClient.get('search/collections',
           queryParameters: {'query': query, 'page': page, 'per_page': perPage});
       return serializers.deserialize(response.data,
           specifiedType:
@@ -52,7 +52,7 @@ class SearchService {
   Future<SearchResult<User>> searchUsers(
       {@required String query, int page = 1, int perPage = 30}) async {
     try {
-      final response = await httpClient.get('search/users',
+      final response = await _httpClient.get('search/users',
           queryParameters: {'query': query, 'page': page, 'per_page': perPage});
       return serializers.deserialize(response.data,
           specifiedType:
