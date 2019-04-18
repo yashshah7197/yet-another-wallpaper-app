@@ -37,8 +37,13 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
   }
 
   @override
-  Stream<PhotosEvent> transform(Stream<PhotosEvent> events) {
-    return (events as Observable<PhotosEvent>)
-        .debounce(Duration(milliseconds: 500));
+  Stream<PhotosState> transform(
+      Stream<PhotosEvent> events, Stream<PhotosState> next(PhotosEvent event)) {
+    return super.transform(
+      (events as Observable<PhotosEvent>).debounce(
+        Duration(milliseconds: 500),
+      ),
+      next,
+    );
   }
 }

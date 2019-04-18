@@ -35,7 +35,7 @@ packages:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.11.2"
+    version: "0.12.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -77,14 +77,14 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.1"
+    version: "1.3.3"
   build_runner_core:
     dependency: transitive
     description:
       name: build_runner_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "3.0.3"
   built_collection:
     dependency: "direct main"
     description:
@@ -154,7 +154,7 @@ packages:
       name: csslib
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.6"
+    version: "0.15.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -208,7 +208,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.0"
+    version: "0.11.1"
   flutter_svg:
     dependency: transitive
     description:
@@ -248,7 +248,7 @@ packages:
       name: html
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.4+1"
+    version: "0.13.4+2"
   http:
     dependency: transitive
     description:
@@ -465,7 +465,7 @@ packages:
       name: shelf_web_socket
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.2+5"
+    version: "0.2.3"
   sky_engine:
     dependency: transitive
     description: flutter
