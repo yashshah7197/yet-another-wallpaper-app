@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
-
+import 'package:yet_another_wallpaper_app/src/collections/repository/collections_repository.dart';
+import 'package:yet_another_wallpaper_app/src/collections/service/collections_service.dart';
+import 'package:yet_another_wallpaper_app/src/home/route/home_route.dart';
 import 'package:yet_another_wallpaper_app/src/photos/repository/photos_repository.dart';
-import 'package:yet_another_wallpaper_app/src/photos/route/photos_route.dart';
 import 'package:yet_another_wallpaper_app/src/photos/service/photos_service.dart';
 import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 
@@ -19,18 +20,27 @@ void main() {
   final photosService = PhotosService(httpClient);
   final photosRepository = PhotosRepository(photosService);
 
+  final collectionsService = CollectionsService(httpClient);
+  final collectionsRepository = CollectionsRepository(collectionsService);
+
   runApp(
     MyApp(
+      collectionsRepository: collectionsRepository,
       photosRepository: photosRepository,
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  final CollectionsRepository collectionsRepository;
   final PhotosRepository photosRepository;
 
-  const MyApp({Key key, @required this.photosRepository})
-      : assert(photosRepository != null),
+  const MyApp(
+      {Key key,
+      @required this.collectionsRepository,
+      @required this.photosRepository})
+      : assert(collectionsRepository != null),
+        assert(photosRepository != null),
         super(key: key);
 
   @override
@@ -41,13 +51,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Yet Another Wallpaper App'),
-        ),
-        body: PhotosRoute(
-          photosRepository: photosRepository,
-        ),
+      home: HomeRoute(
+        collectionsRepository: collectionsRepository,
+        photosRepository: photosRepository,
       ),
     );
   }

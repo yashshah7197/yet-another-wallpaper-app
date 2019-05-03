@@ -5,15 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_event.dart';
 import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_state.dart';
-import 'package:yet_another_wallpaper_app/src/photos/repository/photos_repository.dart';
 
 class PhotosRoute extends StatefulWidget {
-  final PhotosRepository photosRepository;
-
-  const PhotosRoute({Key key, @required this.photosRepository})
-      : assert(photosRepository != null),
-        super(key: key);
-
   @override
   _PhotosRouteState createState() => _PhotosRouteState();
 }
@@ -25,15 +18,8 @@ class _PhotosRouteState extends State<PhotosRoute> {
   @override
   void initState() {
     super.initState();
-    _photosBloc = PhotosBloc(widget.photosRepository);
-    _photosBloc.dispatch(PhotosFetchEvent());
+    _photosBloc = BlocProvider.of<PhotosBloc>(context);
     _scrollController.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    _photosBloc.dispose();
-    super.dispose();
   }
 
   @override

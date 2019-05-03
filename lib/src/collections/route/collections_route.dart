@@ -5,15 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_event.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_state.dart';
-import 'package:yet_another_wallpaper_app/src/collections/repository/collections_repository.dart';
 
 class CollectionsRoute extends StatefulWidget {
-  final CollectionsRepository collectionsRepository;
-
-  const CollectionsRoute({Key key, @required this.collectionsRepository})
-      : assert(collectionsRepository != null),
-        super(key: key);
-
   @override
   _CollectionsRouteState createState() => _CollectionsRouteState();
 }
@@ -25,15 +18,8 @@ class _CollectionsRouteState extends State<CollectionsRoute> {
   @override
   void initState() {
     super.initState();
-    _collectionsBloc = CollectionsBloc(widget.collectionsRepository);
-    _collectionsBloc.dispatch(CollectionsFetchEvent());
+    _collectionsBloc = BlocProvider.of<CollectionsBloc>(context);
     _scrollController.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    _collectionsBloc.dispose();
-    super.dispose();
   }
 
   @override
