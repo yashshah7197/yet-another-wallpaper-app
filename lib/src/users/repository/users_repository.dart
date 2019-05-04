@@ -5,9 +5,9 @@ import 'package:meta/meta.dart';
 
 import 'package:yet_another_wallpaper_app/src/collections/model/collection.dart';
 import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
+import 'package:yet_another_wallpaper_app/src/photos/model/photos_sort_order.dart';
 import 'package:yet_another_wallpaper_app/src/users/model/user.dart';
 import 'package:yet_another_wallpaper_app/src/users/service/users_service.dart';
-import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 
 class UsersRepository {
   final UsersService _usersService;
@@ -21,7 +21,7 @@ class UsersRepository {
           {@required String username,
           int page = 1,
           int perPage = 30,
-          String sortOrder = PhotosSortOrder.latest}) async =>
+          PhotosSortOrder sortOrder = PhotosSortOrder.latest}) async =>
       await _usersService.getUserPhotos(
           username: username,
           page: page,
@@ -32,7 +32,7 @@ class UsersRepository {
           {@required String username,
           int page = 1,
           int perPage = 30,
-          String sortOrder = PhotosSortOrder.latest}) async =>
+          PhotosSortOrder sortOrder = PhotosSortOrder.latest}) async =>
       await _usersService.getUserLikedPhotos(
           username: username,
           page: page,

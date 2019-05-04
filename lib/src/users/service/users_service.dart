@@ -6,8 +6,8 @@ import 'package:meta/meta.dart';
 
 import 'package:yet_another_wallpaper_app/src/collections/model/collection.dart';
 import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
+import 'package:yet_another_wallpaper_app/src/photos/model/photos_sort_order.dart';
 import 'package:yet_another_wallpaper_app/src/users/model/user.dart';
-import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 import 'package:yet_another_wallpaper_app/src/utils/serializers.dart';
 
 class UsersService {
@@ -32,14 +32,14 @@ class UsersService {
       {@required String username,
       int page = 1,
       int perPage = 30,
-      String sortOrder = PhotosSortOrder.latest}) async {
+      PhotosSortOrder sortOrder = PhotosSortOrder.latest}) async {
     try {
-      final response = await _httpClient.get('users/$username/photos',
-          queryParameters: {
-            'page': page,
-            'per_page': perPage,
-            'order_by': sortOrder
-          });
+      final response =
+          await _httpClient.get('users/$username/photos', queryParameters: {
+        'page': page,
+        'per_page': perPage,
+        'order_by': sortOrder.toString().split('.').last
+      });
       return deserializeListOf<Photo>(response.data);
     } on DioError catch (error) {
       // TODO: Handle errors properly instead of returning an empty list
@@ -54,14 +54,14 @@ class UsersService {
       {@required String username,
       int page = 1,
       int perPage = 30,
-      String sortOrder = PhotosSortOrder.latest}) async {
+      PhotosSortOrder sortOrder = PhotosSortOrder.latest}) async {
     try {
-      final response = await _httpClient.get('users/$username/likes',
-          queryParameters: {
-            'page': page,
-            'per_page': perPage,
-            'order_by': sortOrder
-          });
+      final response =
+          await _httpClient.get('users/$username/likes', queryParameters: {
+        'page': page,
+        'per_page': perPage,
+        'order_by': sortOrder.toString().split('.').last
+      });
       return deserializeListOf<Photo>(response.data);
     } on DioError catch (error) {
       // TODO: Handle errors properly instead of returning an empty list

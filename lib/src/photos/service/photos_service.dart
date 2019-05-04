@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 
 import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
-import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
+import 'package:yet_another_wallpaper_app/src/photos/model/photos_sort_order.dart';
 import 'package:yet_another_wallpaper_app/src/utils/serializers.dart';
 
 class PhotosService {
@@ -16,12 +16,12 @@ class PhotosService {
   Future<BuiltList<Photo>> getPhotos(
       {int page = 1,
       int perPage = 30,
-      String sortOrder = PhotosSortOrder.latest}) async {
+      PhotosSortOrder sortOrder = PhotosSortOrder.latest}) async {
     try {
       final response = await _httpClient.get('photos', queryParameters: {
         'page': page,
         'per_page': perPage,
-        'order_by': sortOrder
+        'order_by': sortOrder.toString().split('.').last
       });
       return deserializeListOf<Photo>(response.data);
     } on DioError catch (error) {

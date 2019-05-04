@@ -4,8 +4,8 @@ import 'package:built_collection/built_collection.dart';
 import 'package:meta/meta.dart';
 
 import 'package:yet_another_wallpaper_app/src/photos/model/photo.dart';
+import 'package:yet_another_wallpaper_app/src/photos/model/photos_sort_order.dart';
 import 'package:yet_another_wallpaper_app/src/photos/service/photos_service.dart';
-import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 
 class PhotosRepository {
   final PhotosService _photosService;
@@ -15,7 +15,7 @@ class PhotosRepository {
   Future<BuiltList<Photo>> getPhotos(
           {int page = 1,
           int perPage = 30,
-          String sortOrder = PhotosSortOrder.latest}) async =>
+          PhotosSortOrder sortOrder = PhotosSortOrder.latest}) async =>
       await _photosService.getPhotos(
           page: page, perPage: perPage, sortOrder: sortOrder);
 
