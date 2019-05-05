@@ -145,12 +145,8 @@ class _HomeRouteState extends State<HomeRoute> {
             )
           ],
       onSelected: (collectionsSortOrder) {
-        if (collectionsSortOrder == CollectionsSortOrder.latest) {
-          print('Collections Sort Order: Latest');
-        }
-        if (collectionsSortOrder == CollectionsSortOrder.featured) {
-          print('Collections Sort Order: Featured');
-        }
+        _collectionsBloc
+            .dispatch(CollectionsSortOrderUpdateEvent(collectionsSortOrder));
       },
     );
   }
