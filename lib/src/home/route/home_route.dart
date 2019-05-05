@@ -126,15 +126,7 @@ class _HomeRouteState extends State<HomeRoute> {
             )
           ],
       onSelected: (photosSortOrder) {
-        if (photosSortOrder == PhotosSortOrder.latest) {
-          print('Photos Sort Order: Latest');
-        }
-        if (photosSortOrder == PhotosSortOrder.oldest) {
-          print('Photos Sort Order: Oldest');
-        }
-        if (photosSortOrder == PhotosSortOrder.popular) {
-          print('Photos Sort Order: Popular');
-        }
+        _photosBloc.dispatch(PhotosSortOrderUpdateEvent(photosSortOrder));
       },
     );
   }
