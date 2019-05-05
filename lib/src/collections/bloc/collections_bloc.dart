@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:rxdart/rxdart.dart';
-
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_event.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_state.dart';
 import 'package:yet_another_wallpaper_app/src/collections/repository/collections_repository.dart';
@@ -42,10 +41,12 @@ class CollectionsBloc extends Bloc<CollectionsEvent, CollectionsState> {
   }
 
   @override
-  Stream<CollectionsState> transform(Stream<CollectionsEvent> events,
-      Stream<CollectionsState> next(CollectionsEvent event)) {
+  Stream<CollectionsState> transform(
+    Stream<CollectionsEvent> events,
+    Stream<CollectionsState> next(CollectionsEvent event),
+  ) {
     return super.transform(
-      (events as Observable<CollectionsEvent>).debounce(
+      (events as Observable<CollectionsEvent>).debounceTime(
         Duration(milliseconds: 500),
       ),
       next,
