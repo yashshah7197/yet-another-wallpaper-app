@@ -14,7 +14,7 @@ dependencies:
   equatable: ^0.2.3
   flutter:
     sdk: flutter
-  flutter_advanced_networkimage: ^0.4.15
+  flutter_advanced_networkimage: ^0.5.0-alpha.3
   flutter_bloc: ^0.13.0
   rxdart: ^0.22.0
 
@@ -23,7 +23,7 @@ dev_dependencies:
   built_value_generator: ^6.4.0
   flutter_test:
     sdk: flutter
-  test: ^1.6.1
+  test: ^1.6.3
 
 flutter:
   uses-material-design: true
