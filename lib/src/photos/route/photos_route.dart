@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_event.dart';
 import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_state.dart';
+import 'package:yet_another_wallpaper_app/src/photos/route/photo_details_route.dart';
 
 class PhotosRoute extends StatefulWidget {
   @override
@@ -58,20 +59,36 @@ class _PhotosRouteState extends State<PhotosRoute> {
               final currentPhoto = photos[index];
               return AspectRatio(
                 aspectRatio: 1.0 / 1.0,
-                child: TransitionToImage(
-                  image: AdvancedNetworkImage(
-                    currentPhoto.urls.regular,
-                    useDiskCache: true,
-                  ),
-                  loadingWidget: FittedBox(
-                    child: Container(
-                      color: _convertHexToColor(currentPhoto.color),
-                      width: currentPhoto.width.toDouble(),
-                      height: currentPhoto.height.toDouble(),
+                child: GestureDetector(
+                  child: Hero(
+                    child: TransitionToImage(
+                      image: AdvancedNetworkImage(
+                        currentPhoto.urls.regular,
+                        useDiskCache: true,
+                      ),
+                      loadingWidget: FittedBox(
+                        child: Container(
+                          color: _convertHexToColor(currentPhoto.color),
+                          width: currentPhoto.width.toDouble(),
+                          height: currentPhoto.height.toDouble(),
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                      fit: BoxFit.cover,
                     ),
-                    fit: BoxFit.cover,
+                    tag: currentPhoto.id,
+                    transitionOnUserGestures: true,
                   ),
-                  fit: BoxFit.cover,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) {
+                          return PhotoDetailsRoute(photo: currentPhoto);
+                        },
+                      ),
+                    );
+                  },
                 ),
               );
             },
