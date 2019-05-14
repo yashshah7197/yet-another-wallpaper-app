@@ -56,22 +56,25 @@ class _CollectionsRouteState extends State<CollectionsRoute> {
                 );
               }
               final currentCollection = collections[index];
-              return TransitionToImage(
-                image: AdvancedNetworkImage(
-                  currentCollection.coverPhoto.urls.regular,
-                  useDiskCache: true,
-                ),
-                loadingWidget: FittedBox(
-                  child: Container(
-                    color: _convertHexToColor(
-                      currentCollection.coverPhoto.color,
+              return AspectRatio(
+                aspectRatio: 1.0 / 1.0,
+                child: TransitionToImage(
+                  image: AdvancedNetworkImage(
+                    currentCollection.coverPhoto.urls.regular,
+                    useDiskCache: true,
+                  ),
+                  loadingWidget: FittedBox(
+                    child: Container(
+                      color: _convertHexToColor(
+                        currentCollection.coverPhoto.color,
+                      ),
+                      width: currentCollection.coverPhoto.width.toDouble(),
+                      height: currentCollection.coverPhoto.height.toDouble(),
                     ),
-                    width: currentCollection.coverPhoto.width.toDouble(),
-                    height: currentCollection.coverPhoto.height.toDouble(),
+                    fit: BoxFit.cover,
                   ),
                   fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               );
             },
             itemCount: collections.length + 1,

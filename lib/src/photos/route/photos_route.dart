@@ -56,20 +56,23 @@ class _PhotosRouteState extends State<PhotosRoute> {
                 );
               }
               final currentPhoto = photos[index];
-              return TransitionToImage(
-                image: AdvancedNetworkImage(
-                  currentPhoto.urls.regular,
-                  useDiskCache: true,
-                ),
-                loadingWidget: FittedBox(
-                  child: Container(
-                    color: _convertHexToColor(currentPhoto.color),
-                    width: currentPhoto.width.toDouble(),
-                    height: currentPhoto.height.toDouble(),
+              return AspectRatio(
+                aspectRatio: 1.0 / 1.0,
+                child: TransitionToImage(
+                  image: AdvancedNetworkImage(
+                    currentPhoto.urls.regular,
+                    useDiskCache: true,
+                  ),
+                  loadingWidget: FittedBox(
+                    child: Container(
+                      color: _convertHexToColor(currentPhoto.color),
+                      width: currentPhoto.width.toDouble(),
+                      height: currentPhoto.height.toDouble(),
+                    ),
+                    fit: BoxFit.cover,
                   ),
                   fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               );
             },
             itemCount: photos.length + 1,
