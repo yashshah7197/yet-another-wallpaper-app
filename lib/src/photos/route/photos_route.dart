@@ -59,36 +59,48 @@ class _PhotosRouteState extends State<PhotosRoute> {
               final currentPhoto = photos[index];
               return AspectRatio(
                 aspectRatio: 1.0 / 1.0,
-                child: GestureDetector(
-                  child: Hero(
-                    child: TransitionToImage(
-                      image: AdvancedNetworkImage(
-                        currentPhoto.urls.regular,
-                        useDiskCache: true,
-                      ),
-                      loadingWidget: FittedBox(
-                        child: Container(
-                          color: _convertHexToColor(currentPhoto.color),
-                          width: currentPhoto.width.toDouble(),
-                          height: currentPhoto.height.toDouble(),
+                child: GridTile(
+                  child: GestureDetector(
+                    child: Hero(
+                      child: TransitionToImage(
+                        image: AdvancedNetworkImage(
+                          currentPhoto.urls.regular,
+                          useDiskCache: true,
+                        ),
+                        loadingWidget: FittedBox(
+                          child: Container(
+                            color: _convertHexToColor(currentPhoto.color),
+                            width: currentPhoto.width.toDouble(),
+                            height: currentPhoto.height.toDouble(),
+                          ),
+                          fit: BoxFit.cover,
                         ),
                         fit: BoxFit.cover,
                       ),
-                      fit: BoxFit.cover,
+                      tag: currentPhoto.id,
+                      transitionOnUserGestures: true,
                     ),
-                    tag: currentPhoto.id,
-                    transitionOnUserGestures: true,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) {
+                            return PhotoDetailsRoute(photo: currentPhoto);
+                          },
+                        ),
+                      );
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) {
-                          return PhotoDetailsRoute(photo: currentPhoto);
-                        },
+                  footer: GridTileBar(
+                    leading: CircleAvatar(
+                      backgroundImage: AdvancedNetworkImage(
+                        currentPhoto.user.profileImage.large,
+                        useDiskCache: true,
                       ),
-                    );
-                  },
+                    ),
+                    title: Text(currentPhoto.user.name),
+                    subtitle: Text(currentPhoto.user.username),
+                  ),
                 ),
               );
             },
