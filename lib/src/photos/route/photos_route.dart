@@ -99,7 +99,7 @@ class _PhotosRouteState extends State<PhotosRoute> {
                       ),
                     ),
                     title: Text(currentPhoto.user.name),
-                    subtitle: Text(currentPhoto.user.username),
+                    subtitle: Text('@${currentPhoto.user.username}'),
                   ),
                 ),
               );
