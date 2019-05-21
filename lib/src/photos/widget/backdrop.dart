@@ -134,7 +134,7 @@ class _BackdropState extends State<Backdrop>
   }
 
   Widget _buildBackdropStack(BuildContext context, BoxConstraints constraints) {
-    const double frontLayerHeaderHeight = 48.0;
+    const double frontLayerHeaderHeight = 104.0;
     final Size frontLayerSize = constraints.biggest;
     final double frontLayerTop = frontLayerSize.height - frontLayerHeaderHeight;
 

@@ -15,16 +15,29 @@ class PhotoDetailsRoute extends StatelessWidget {
   Widget build(BuildContext context) {
     return Backdrop(
       backLayer: PhotoDetailsBackLayer(photo: photo),
-      frontLayer: PhotoDetailsFrontLayer(),
+      frontLayer: PhotoDetailsFrontLayer(photo: photo),
     );
   }
 }
 
 class PhotoDetailsFrontLayer extends StatelessWidget {
+  final Photo photo;
+
+  const PhotoDetailsFrontLayer({Key key, @required this.photo})
+      : assert(photo != null),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Photo Details'),
+    return ListTile(
+      leading: CircleAvatar(
+        backgroundImage: AdvancedNetworkImage(
+          photo.user.profileImage.large,
+          useDiskCache: true,
+        ),
+      ),
+      title: Text(photo.user.name),
+      subtitle: Text('@${photo.user.username}'),
     );
   }
 }
