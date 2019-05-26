@@ -134,6 +134,7 @@ class PhotoDetailsBackLayer extends StatelessWidget {
             photo.urls.regular,
             useDiskCache: true,
           ),
+          initialScale: PhotoViewComputedScale.covered,
           heroTag: photo.id,
           transitionOnUserGestures: true,
         ),

@@ -174,11 +174,8 @@ class _BackdropState extends State<Backdrop>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: LayoutBuilder(
-        builder: _buildBackdropStack,
-      ),
+    return LayoutBuilder(
+      builder: _buildBackdropStack,
     );
   }
 }
