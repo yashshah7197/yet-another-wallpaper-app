@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:provider/provider.dart';
 import 'package:yet_another_wallpaper_app/src/collections/repository/collections_repository.dart';
 import 'package:yet_another_wallpaper_app/src/collections/service/collections_service.dart';
 import 'package:yet_another_wallpaper_app/src/home/route/home_route.dart';
@@ -45,15 +46,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Yet Another Wallpaper App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomeRoute(
-        collectionsRepository: collectionsRepository,
-        photosRepository: photosRepository,
+    return Provider<PhotosRepository>.value(
+      value: photosRepository,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Yet Another Wallpaper App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: HomeRoute(
+          collectionsRepository: collectionsRepository,
+          photosRepository: photosRepository,
+        ),
       ),
     );
   }
