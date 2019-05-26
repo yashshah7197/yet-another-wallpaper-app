@@ -147,7 +147,7 @@ class _BackdropState extends State<Backdrop>
       ),
       end: RelativeRect.fromLTRB(
         0.0,
-        0.0,
+        frontLayerTop - 384,
         0.0,
         0.0,
       ),
