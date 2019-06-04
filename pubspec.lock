@@ -28,7 +28,7 @@ packages:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.1"
+    version: "1.5.2"
   async:
     dependency: transitive
     description:
@@ -70,7 +70,7 @@ packages:
       name: build_daemon
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.1"
+    version: "1.0.0"
   build_resolvers:
     dependency: transitive
     description:
@@ -84,7 +84,7 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   build_runner_core:
     dependency: transitive
     description:
@@ -105,14 +105,14 @@ packages:
       name: built_value
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.5.0"
+    version: "6.6.0"
   built_value_generator:
     dependency: "direct dev"
     description:
       name: built_value_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.5.0"
+    version: "6.6.0"
   charcode:
     dependency: transitive
     description:
@@ -182,14 +182,14 @@ packages:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.5"
+    version: "2.1.7"
   equatable:
     dependency: "direct main"
     description:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.5"
+    version: "0.2.6"
   fixnum:
     dependency: transitive
     description:
@@ -215,7 +215,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.0"
+    version: "0.15.1"
   flutter_svg:
     dependency: transitive
     description:
@@ -339,7 +339,7 @@ packages:
       name: mime
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.6+2"
+    version: "0.9.6+3"
   multi_server_socket:
     dependency: transitive
     description:
@@ -437,7 +437,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "2.0.1+1"
   pub_semver:
     dependency: transitive
     description:
