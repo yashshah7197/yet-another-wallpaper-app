@@ -6,6 +6,7 @@ import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_event.dart';
 import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_state.dart';
 import 'package:yet_another_wallpaper_app/src/photos/route/photo_details_route.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class PhotosRoute extends StatefulWidget {
   @override
@@ -45,7 +46,13 @@ class _PhotosRouteState extends State<PhotosRoute> {
               ),
             );
           }
-          return ListView.builder(
+          return StaggeredGridView.countBuilder(
+            crossAxisCount: 4,
+            staggeredTileBuilder: (i) {
+              return StaggeredTile.fit(1);
+            },
+            mainAxisSpacing: 4.0,
+            crossAxisSpacing: 4.0,
             itemBuilder: (context, index) {
               if (index >= photos.length) {
                 return Container(
@@ -58,7 +65,7 @@ class _PhotosRouteState extends State<PhotosRoute> {
               }
               final currentPhoto = photos[index];
               return AspectRatio(
-                aspectRatio: 1.0 / 1.0,
+                aspectRatio: currentPhoto.width / currentPhoto.height,
                 child: GridTile(
                   child: GestureDetector(
                     child: Hero(
@@ -90,16 +97,6 @@ class _PhotosRouteState extends State<PhotosRoute> {
                         ),
                       );
                     },
-                  ),
-                  footer: GridTileBar(
-                    leading: CircleAvatar(
-                      backgroundImage: AdvancedNetworkImage(
-                        currentPhoto.user.profileImage.large,
-                        useDiskCache: true,
-                      ),
-                    ),
-                    title: Text(currentPhoto.user.name),
-                    subtitle: Text('@${currentPhoto.user.username}'),
                   ),
                 ),
               );

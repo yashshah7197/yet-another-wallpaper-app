@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_event.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_state.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class CollectionsRoute extends StatefulWidget {
   @override
@@ -44,7 +45,13 @@ class _CollectionsRouteState extends State<CollectionsRoute> {
               ),
             );
           }
-          return ListView.builder(
+          return StaggeredGridView.countBuilder(
+            crossAxisCount: 4,
+            staggeredTileBuilder: (i) {
+              return StaggeredTile.fit(2);
+            },
+            mainAxisSpacing: 4.0,
+            crossAxisSpacing: 4.0,
             itemBuilder: (context, index) {
               if (index >= collections.length) {
                 return Container(
@@ -57,7 +64,7 @@ class _CollectionsRouteState extends State<CollectionsRoute> {
               }
               final currentCollection = collections[index];
               return AspectRatio(
-                aspectRatio: 1.0 / 1.0,
+                aspectRatio: currentCollection.coverPhoto.width / currentCollection.coverPhoto.height,
                 child: TransitionToImage(
                   image: AdvancedNetworkImage(
                     currentCollection.coverPhoto.urls.regular,
