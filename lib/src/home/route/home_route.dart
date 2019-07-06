@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
+import 'package:flutter_advanced_networkimage/transition.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_event.dart';
 import 'package:yet_another_wallpaper_app/src/collections/model/collections_sort_order.dart';
@@ -16,6 +19,10 @@ import 'package:yet_another_wallpaper_app/src/photos/bloc/photos_event.dart';
 import 'package:yet_another_wallpaper_app/src/photos/model/photos_sort_order.dart';
 import 'package:yet_another_wallpaper_app/src/photos/repository/photos_repository.dart';
 import 'package:yet_another_wallpaper_app/src/photos/route/photos_route.dart';
+import 'package:yet_another_wallpaper_app/src/search/bloc/search_bloc.dart';
+import 'package:yet_another_wallpaper_app/src/search/bloc/search_event.dart';
+import 'package:yet_another_wallpaper_app/src/search/bloc/search_state.dart';
+import 'package:yet_another_wallpaper_app/src/search/repository/search_repository.dart';
 
 class HomeRoute extends StatefulWidget {
   final CollectionsRepository collectionsRepository;
@@ -130,7 +137,12 @@ class _HomeRouteState extends State<HomeRoute> {
       ),
       IconButton(
         icon: Icon(Icons.search),
-        onPressed: () {},
+        onPressed: () {
+          showSearch(
+              context: context,
+              delegate: _PhotosSearchDelegate(
+                  Provider.of<SearchRepository>(context)));
+        },
       ),
     ];
   }
@@ -188,5 +200,153 @@ class _HomeRouteState extends State<HomeRoute> {
         },
       ),
     ];
+  }
+}
+
+class _PhotosSearchDelegate extends SearchDelegate {
+  final SearchRepository _searchRepository;
+  SearchBloc _searchBloc;
+
+  _PhotosSearchDelegate(this._searchRepository);
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: Icon(
+          Icons.clear,
+          color: Colors.black,
+        ),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        Icons.arrow_back,
+        color: Colors.black,
+      ),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    if (query == '') {
+      return Container(
+        child: Center(
+          child: Text('Type your query and press search'),
+        ),
+      );
+    }
+    _searchBloc = SearchBloc(_searchRepository);
+    _searchBloc.dispatch(SearchPhotosEvent(query));
+    ScrollController scrollController = ScrollController();
+    scrollController.addListener(() {
+      final currentScrollPosition = scrollController.position.pixels;
+      final maxScrollPosition = scrollController.position.maxScrollExtent;
+      if (currentScrollPosition == maxScrollPosition) {
+        _searchBloc.dispatch(SearchPhotosEvent(query));
+      }
+    });
+    return BlocBuilder(
+      bloc: _searchBloc,
+      builder: (context, currentState) {
+        if (currentState is SearchEmptyState) {
+          return Container();
+        }
+        if (currentState is SearchSearchingState) {
+          return Container(
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+        if (currentState is SearchPhotosLoadedState) {
+          final photos = currentState.photos;
+          if (photos.isEmpty) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('No photos found!'),
+              ),
+            );
+          }
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              if (index >= photos.length) {
+                return Container(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: CircularProgressIndicator(),
+                  ),
+                );
+              }
+              final currentPhoto = photos[index];
+              return AspectRatio(
+                aspectRatio: 1.0 / 1.0,
+                child: GridTile(
+                  child: GestureDetector(
+                    child: TransitionToImage(
+                      image: AdvancedNetworkImage(
+                        currentPhoto.urls.regular,
+                        useDiskCache: true,
+                      ),
+                      loadingWidget: FittedBox(
+                        child: Container(
+                          color: _convertHexToColor(currentPhoto.color),
+                          width: currentPhoto.width.toDouble(),
+                          height: currentPhoto.height.toDouble(),
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  footer: GridTileBar(
+                    leading: CircleAvatar(
+                      backgroundImage: AdvancedNetworkImage(
+                        currentPhoto.user.profileImage.large,
+                        useDiskCache: true,
+                      ),
+                    ),
+                    title: Text(currentPhoto.user.name),
+                    subtitle: Text('@${currentPhoto.user.username}'),
+                  ),
+                ),
+              );
+            },
+            itemCount: photos.length + 1,
+            controller: scrollController,
+          );
+        }
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text('Type your query and press search'),
+      ),
+    );
+  }
+
+  Color _convertHexToColor(String hexCode) {
+    return Color(int.parse(hexCode.substring(1, 7), radix: 16) + 0xFF000000);
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return Theme.of(context);
   }
 }

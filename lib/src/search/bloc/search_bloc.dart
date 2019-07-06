@@ -21,19 +21,14 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   Stream<SearchState> mapEventToState(SearchEvent currentEvent) async* {
     if (currentEvent is SearchPhotosEvent) {
       if (currentState is SearchEmptyState) {
-        yield SearchSearchingState();
         final query = currentEvent.query;
         final searchResult = await _searchRepository.searchPhotos(
             query: query, page: _currentPage);
         final photos = searchResult.results;
         _currentPage++;
-        yield SearchPhotosLoadedState(
-            photos: List.from((currentState as SearchPhotosLoadedState).photos)
-              ..addAll(photos));
-        return;
+        yield SearchPhotosLoadedState(photos: photos.toList());
       }
       if (currentState is SearchPhotosLoadedState) {
-        yield SearchSearchingState();
         final query = currentEvent.query;
         final searchResult = await _searchRepository.searchPhotos(
             query: query, page: _currentPage);
@@ -42,7 +37,6 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         yield SearchPhotosLoadedState(
             photos: List.from((currentState as SearchPhotosLoadedState).photos)
               ..addAll(photos));
-        return;
       }
     }
   }

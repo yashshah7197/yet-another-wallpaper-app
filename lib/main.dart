@@ -7,6 +7,8 @@ import 'package:yet_another_wallpaper_app/src/collections/service/collections_se
 import 'package:yet_another_wallpaper_app/src/home/route/home_route.dart';
 import 'package:yet_another_wallpaper_app/src/photos/repository/photos_repository.dart';
 import 'package:yet_another_wallpaper_app/src/photos/service/photos_service.dart';
+import 'package:yet_another_wallpaper_app/src/search/repository/search_repository.dart';
+import 'package:yet_another_wallpaper_app/src/search/service/search_service.dart';
 import 'package:yet_another_wallpaper_app/src/utils/api_constants.dart';
 
 void main() {
@@ -24,10 +26,14 @@ void main() {
   final collectionsService = CollectionsService(httpClient);
   final collectionsRepository = CollectionsRepository(collectionsService);
 
+  final searchService = SearchService(httpClient);
+  final searchRepository = SearchRepository(searchService);
+
   runApp(
     MyApp(
       collectionsRepository: collectionsRepository,
       photosRepository: photosRepository,
+      searchRepository: searchRepository,
     ),
   );
 }
@@ -35,19 +41,25 @@ void main() {
 class MyApp extends StatelessWidget {
   final CollectionsRepository collectionsRepository;
   final PhotosRepository photosRepository;
+  final SearchRepository searchRepository;
 
   const MyApp(
       {Key key,
       @required this.collectionsRepository,
-      @required this.photosRepository})
+      @required this.photosRepository,
+      @required this.searchRepository})
       : assert(collectionsRepository != null),
         assert(photosRepository != null),
+        assert(searchRepository != null),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Provider<PhotosRepository>.value(
-      value: photosRepository,
+    return MultiProvider(
+      providers: [
+        Provider<PhotosRepository>.value(value: photosRepository),
+        Provider<SearchRepository>.value(value: searchRepository),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Yet Another Wallpaper App',
