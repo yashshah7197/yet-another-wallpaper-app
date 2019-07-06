@@ -70,9 +70,7 @@ class _HomeRouteState extends State<HomeRoute> {
           child: Scaffold(
             appBar: AppBar(
               title: Text('Yet Another Wallpaper App'),
-              actions: <Widget>[
-                _buildAppBarActions(currentTab),
-              ],
+              actions: _buildAppBarActions(currentTab),
             ),
             body: _buildBody(currentTab),
             bottomNavigationBar: AppTabSelector(
@@ -96,7 +94,7 @@ class _HomeRouteState extends State<HomeRoute> {
     }
   }
 
-  Widget _buildAppBarActions(AppTab currentTab) {
+  List<Widget> _buildAppBarActions(AppTab currentTab) {
     if (currentTab == AppTab.photos) {
       return _buildPhotosAppBarActions();
     }
@@ -108,77 +106,87 @@ class _HomeRouteState extends State<HomeRoute> {
     }
   }
 
-  Widget _buildPhotosAppBarActions() {
-    return PopupMenuButton<PhotosSortOrder>(
-      icon: Icon(Icons.filter_list),
-      itemBuilder: (context) => <PopupMenuItem<PhotosSortOrder>>[
-            PopupMenuItem<PhotosSortOrder>(
-              child: Text('Latest'),
-              value: PhotosSortOrder.latest,
-            ),
-            PopupMenuItem<PhotosSortOrder>(
-              child: Text('Oldest'),
-              value: PhotosSortOrder.oldest,
-            ),
-            PopupMenuItem<PhotosSortOrder>(
-              child: Text('Popular'),
-              value: PhotosSortOrder.popular,
-            )
-          ],
-      onSelected: (photosSortOrder) {
-        _photosBloc.dispatch(PhotosSortOrderUpdateEvent(photosSortOrder));
-      },
-    );
+  List<Widget> _buildPhotosAppBarActions() {
+    return [
+      PopupMenuButton<PhotosSortOrder>(
+        icon: Icon(Icons.filter_list),
+        itemBuilder: (context) => <PopupMenuItem<PhotosSortOrder>>[
+              PopupMenuItem<PhotosSortOrder>(
+                child: Text('Latest'),
+                value: PhotosSortOrder.latest,
+              ),
+              PopupMenuItem<PhotosSortOrder>(
+                child: Text('Oldest'),
+                value: PhotosSortOrder.oldest,
+              ),
+              PopupMenuItem<PhotosSortOrder>(
+                child: Text('Popular'),
+                value: PhotosSortOrder.popular,
+              )
+            ],
+        onSelected: (photosSortOrder) {
+          _photosBloc.dispatch(PhotosSortOrderUpdateEvent(photosSortOrder));
+        },
+      ),
+      IconButton(
+        icon: Icon(Icons.search),
+        onPressed: () {},
+      ),
+    ];
   }
 
-  Widget _buildCollectionsAppBarActions() {
-    return PopupMenuButton<CollectionsSortOrder>(
-      icon: Icon(Icons.filter_list),
-      itemBuilder: (context) => <PopupMenuItem<CollectionsSortOrder>>[
-            PopupMenuItem<CollectionsSortOrder>(
-              child: Text('Latest'),
-              value: CollectionsSortOrder.latest,
-            ),
-            PopupMenuItem<CollectionsSortOrder>(
-              child: Text('Featured'),
-              value: CollectionsSortOrder.featured,
-            )
-          ],
-      onSelected: (collectionsSortOrder) {
-        _collectionsBloc
-            .dispatch(CollectionsSortOrderUpdateEvent(collectionsSortOrder));
-      },
-    );
+  List<Widget> _buildCollectionsAppBarActions() {
+    return [
+      PopupMenuButton<CollectionsSortOrder>(
+        icon: Icon(Icons.filter_list),
+        itemBuilder: (context) => <PopupMenuItem<CollectionsSortOrder>>[
+              PopupMenuItem<CollectionsSortOrder>(
+                child: Text('Latest'),
+                value: CollectionsSortOrder.latest,
+              ),
+              PopupMenuItem<CollectionsSortOrder>(
+                child: Text('Featured'),
+                value: CollectionsSortOrder.featured,
+              )
+            ],
+        onSelected: (collectionsSortOrder) {
+          _collectionsBloc
+              .dispatch(CollectionsSortOrderUpdateEvent(collectionsSortOrder));
+        },
+      ),
+    ];
   }
 
-  Widget _buildDownloadsAppBarActions() {
-    return PopupMenuButton<DownloadsSortOrder>(
-      icon: Icon(Icons.filter_list),
-      itemBuilder: (context) => <PopupMenuItem<DownloadsSortOrder>>[
-            PopupMenuItem<DownloadsSortOrder>(
-              child: Text('All'),
-              value: DownloadsSortOrder.all,
-            ),
-            PopupMenuItem<DownloadsSortOrder>(
-              child: Text('In Progress'),
-              value: DownloadsSortOrder.inProgress,
-            ),
-            PopupMenuItem<DownloadsSortOrder>(
-              child: Text('Completed'),
-              value: DownloadsSortOrder.completed,
-            )
-          ],
-      onSelected: (downloadsSortOrder) {
-        if (downloadsSortOrder == DownloadsSortOrder.all) {
-          print('Downloads Sort Order: All');
-        }
-        if (downloadsSortOrder == DownloadsSortOrder.inProgress) {
-          print('Downloads Sort Order: In Progress');
-        }
-        if (downloadsSortOrder == DownloadsSortOrder.completed) {
-          print('Downloads Sort Order: Completed');
-        }
-      },
-    );
+  List<Widget> _buildDownloadsAppBarActions() {
+    return [
+      PopupMenuButton<DownloadsSortOrder>(
+        icon: Icon(Icons.filter_list),
+        itemBuilder: (context) => <PopupMenuItem<DownloadsSortOrder>>[
+              PopupMenuItem<DownloadsSortOrder>(
+                child: Text('All'),
+                value: DownloadsSortOrder.all,
+              ),
+              PopupMenuItem<DownloadsSortOrder>(
+                child: Text('In Progress'),
+                value: DownloadsSortOrder.inProgress,
+              ),
+              PopupMenuItem<DownloadsSortOrder>(
+                child: Text('Completed'),
+                value: DownloadsSortOrder.completed,
+              )
+            ],
+        onSelected: (downloadsSortOrder) {
+          if (downloadsSortOrder == DownloadsSortOrder.all) {
+            print('Downloads Sort Order: All');
+          }
+          if (downloadsSortOrder == DownloadsSortOrder.inProgress) {
+            print('Downloads Sort Order: In Progress');
+          }
+          if (downloadsSortOrder == DownloadsSortOrder.completed) {
+            print('Downloads Sort Order: Completed');
+          }
+        },
+      ),
+    ];
   }
 }
