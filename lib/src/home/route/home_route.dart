@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:flutter_advanced_networkimage/transition.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_event.dart';
@@ -310,6 +311,44 @@ class _PhotosSearchDelegate extends SearchDelegate {
                       ),
                       fit: BoxFit.cover,
                     ),
+                      onLongPress: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return SingleChildScrollView(
+                              child: Column(
+                                children: <Widget>[
+                                  ListTile(
+                                    leading: Icon(OMIcons.code, color: Colors.black,),
+                                    title: Text(currentPhoto.id),
+                                    subtitle: Text('Photo ID'),
+                                  ),
+                                  ListTile(
+                                    leading: Icon(OMIcons.aspectRatio, color: Colors.black),
+                                    title: Text(currentPhoto.width.toString()),
+                                    subtitle: Text('Photo Width'),
+                                  ),
+                                  ListTile(
+                                    leading: Icon(OMIcons.aspectRatio, color: Colors.black),
+                                    title: Text(currentPhoto.height.toString()),
+                                    subtitle: Text('Photo Height'),
+                                  ),
+                                  ListTile(
+                                    leading: Icon(OMIcons.colorLens, color: Colors.black),
+                                    title: Text(currentPhoto.color),
+                                    subtitle: Text('Photo Color'),
+                                  ),
+                                  ListTile(
+                                    leading: Icon(OMIcons.favoriteBorder, color: Colors.black),
+                                    title: Text(currentPhoto.likeCount.toString()),
+                                    subtitle: Text('Photo Like Count'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
                   ),
                   footer: GridTileBar(
                     leading: CircleAvatar(

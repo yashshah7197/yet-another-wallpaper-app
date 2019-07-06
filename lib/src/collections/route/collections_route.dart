@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:flutter_advanced_networkimage/transition.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_bloc.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_event.dart';
 import 'package:yet_another_wallpaper_app/src/collections/bloc/collections_state.dart';
@@ -65,22 +66,50 @@ class _CollectionsRouteState extends State<CollectionsRoute> {
               final currentCollection = collections[index];
               return AspectRatio(
                 aspectRatio: currentCollection.coverPhoto.width / currentCollection.coverPhoto.height,
-                child: TransitionToImage(
-                  image: AdvancedNetworkImage(
-                    currentCollection.coverPhoto.urls.regular,
-                    useDiskCache: true,
-                  ),
-                  loadingWidget: FittedBox(
-                    child: Container(
-                      color: _convertHexToColor(
-                        currentCollection.coverPhoto.color,
+                child: GestureDetector(
+                  child: TransitionToImage(
+                    image: AdvancedNetworkImage(
+                      currentCollection.coverPhoto.urls.regular,
+                      useDiskCache: true,
+                    ),
+                    loadingWidget: FittedBox(
+                      child: Container(
+                        color: _convertHexToColor(
+                          currentCollection.coverPhoto.color,
+                        ),
+                        width: currentCollection.coverPhoto.width.toDouble(),
+                        height: currentCollection.coverPhoto.height.toDouble(),
                       ),
-                      width: currentCollection.coverPhoto.width.toDouble(),
-                      height: currentCollection.coverPhoto.height.toDouble(),
+                      fit: BoxFit.cover,
                     ),
                     fit: BoxFit.cover,
                   ),
-                  fit: BoxFit.cover,
+                  onLongPress: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Column(
+                          children: <Widget>[
+                            ListTile(
+                              leading: Icon(OMIcons.code, color: Colors.black,),
+                              title: Text(currentCollection.id.toString()),
+                              subtitle: Text('Collection ID'),
+                            ),
+                            ListTile(
+                              leading: Icon(OMIcons.title, color: Colors.black),
+                              title: Text(currentCollection.title.toString()),
+                              subtitle: Text('Collection Title'),
+                            ),
+                            ListTile(
+                              leading: Icon(OMIcons.formatListNumbered, color: Colors.black),
+                              title: Text(currentCollection.photoCount.toString()),
+                              subtitle: Text('Collection Photo Count'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                 ),
               );
             },
